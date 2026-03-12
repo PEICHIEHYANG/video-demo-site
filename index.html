@@ -175,20 +175,13 @@
       min-height:520px;
       border-radius:28px;
       overflow:hidden;
-      background:
-        radial-gradient(circle at center, rgba(92,189,203,.12) 0%, rgba(92,189,203,.06) 35%, rgba(92,189,203,.02) 60%, transparent 78%),
-        linear-gradient(135deg, #eef8f6 0%, #edf7fb 100%);
+      background:transparent;
       display:flex;
       align-items:center;
       justify-content:center;
     }
     .hero-media::before{
-      content:"";
-      position:absolute;
-      inset:6% 4%;
-      border-radius:50%;
-      background:radial-gradient(circle, rgba(122,201,214,.12) 0%, rgba(122,201,214,.06) 52%, rgba(122,201,214,0) 75%);
-      z-index:0;
+      display:none;
     }
     .hero-banner-image{
       position:relative;
@@ -416,77 +409,74 @@
       flex:1;
     }
 
-    .site-{
+    .site-footer{
       margin-top:10px;
       background:#f7f9f8;
       border-top:3px solid var(--primary);
     }
-    .-main{
+    .footer-main{
       width:var(--container);
       margin:0 auto;
-      padding:30px 0 34px;
+      padding:26px 0 28px;
       display:grid;
-      grid-template-columns:460px 1px minmax(0,1fr);
+      grid-template-columns:minmax(220px, 340px) minmax(0,1fr);
       gap:32px;
       align-items:center;
     }
-    .-logo-area{
+    .footer-logo-area{
       display:flex;
       align-items:center;
-      gap:20px;
-      min-height:120px;
+      justify-content:flex-start;
     }
-    .-logo-wrap{
-      min-width:240px;
-      min-height:72px;
-      background:transparent;
-      border:none;
-      border-radius:0;
+    .footer-logo-wrap{
+      width:100%;
       display:flex;
       align-items:center;
       justify-content:flex-start;
       padding:0;
-      flex:0 0 auto;
     }
     .footer-logo{
-      width:218px;
-      min-width:218px;
+      width:min(100%, 320px);
       height:auto;
-      max-width:none;
-      max-height:none;
       object-fit:contain;
       display:block;
     }
-    .footer-org{
-      min-width:0;
-    }
-    .footer-org .name{
-      font-size:2rem;
-      font-weight:800;
-      color:var(--text);
-      line-height:1.25;
-      letter-spacing:.01em;
-      word-break:break-word;
-    }
+    .footer-org,
     .footer-div{
-      width:1px;
-      height:100%;
-      min-height:130px;
-      background:#d5e7e2;
+      display:none;
     }
     .footer-info{
       min-width:0;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .footer-info-top{
+      display:flex;
+      align-items:center;
+      gap:32px;
+      flex-wrap:wrap;
     }
     .footer-copy{
       font-size:1rem;
       font-weight:800;
       color:var(--text);
-      margin-bottom:8px;
+      line-height:1.5;
+      white-space:nowrap;
+    }
+    .footer-phone,
+    .footer-address{
+      font-size:1rem;
+      font-weight:500;
+      color:var(--muted);
+      line-height:1.5;
+      white-space:nowrap;
     }
     .footer-meta{
+      margin:0;
       color:var(--muted);
       font-size:.98rem;
-      line-height:1.9;
+      line-height:1.8;
     }
     .footer-bottom{
       background:var(--primary-dark);
@@ -605,13 +595,11 @@
         grid-template-columns:repeat(2,1fr);
       }
       .footer-main{
-        grid-template-columns:1fr;
-        gap:20px;
+        grid-template-columns:minmax(200px, 280px) minmax(0,1fr);
+        gap:24px;
       }
-      .footer-div{
-        width:100%;
-        height:1px;
-        min-height:1px;
+      .footer-info-top{
+        gap:24px;
       }
     }
 
@@ -675,22 +663,28 @@
         padding:22px;
       }
       .footer-main{
-        padding:22px 0;
-      }
-      .footer-logo-area{
-        align-items:flex-start;
-        min-height:auto;
-        flex-direction:column;
+        grid-template-columns:minmax(110px, 150px) minmax(0,1fr);
+        gap:16px;
+        padding:20px 0;
       }
       .footer-logo-wrap{
-        width:180px;
-        height:96px;
+        width:100%;
       }
-      .footer-org .name{
-        font-size:1.65rem;
+      .footer-logo{
+        width:100%;
+        max-width:150px;
       }
+      .footer-info-top{
+        display:grid;
+        grid-template-columns:1fr;
+        gap:8px;
+      }
+      .footer-copy,
+      .footer-phone,
+      .footer-address,
       .footer-meta{
         font-size:.92rem;
+        white-space:normal;
       }
     }
   </style>
@@ -710,7 +704,7 @@
 
       <nav class="nav-links" id="navLinks" aria-label="主選單">
         <a class="is-primary" href="#overview">計畫總覽</a>
-        <a href="#plan-a">計畫A</a>
+        <a href="#plan-a">商業服務業減碳指引</a>
         <a href="#plan-b">計畫B</a>
         <a href="#plan-c">計畫C</a>
       </nav>
@@ -729,12 +723,11 @@
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#overview">探索計畫</a>
-            
           </div>
         </div>
 
         <div class="hero-media">
-          <img class="hero-banner-image" src="assets/banner.png" alt="首頁主視覺圖片" />
+          <img class="hero-banner-image" src="assets/logo.png" alt="首頁主視覺圖片" />
         </div>
       </div>
     </section>
@@ -752,7 +745,7 @@
         <div class="plan-top" id="planAContent"></div>
         <div class="video-area">
           <div class="video-area-head">
-            <h3>計畫A｜影片素材</h3>
+            <h3>商業服務業減碳指引｜影片素材</h3>
             <span></span>
           </div>
           <div class="video-grid" id="planAVideos"></div>
@@ -793,26 +786,21 @@
         <div class="footer-logo-wrap">
           <img class="footer-logo" src="assets/橫式_0731.png" alt="經濟部商業發展署" />
         </div>
-        <div class="footer-org">
-          <div class="name"></div>
-        </div>
       </div>
-
-      <div class="footer-div"></div>
 
       <div class="footer-info">
-        <div class="footer-copy">所有權人：經濟部商業發展署</div>
-        <div class="footer-meta">
-          地址：100210 臺北市中正區福州街15號<br>
-          總機：02-2343-3300　<br>
-          本網站內容與素材版權歸所有權人或各權利人所有，未經授權請勿任意轉載或使用。
+        <div class="footer-info-top">
+          <div class="footer-copy">所有權人：經濟部商業發展署</div>
+          <div class="footer-phone">總機：02-2343-3300</div>
+          <div class="footer-address">地址：100210 臺北市中正區福州街15號</div>
         </div>
+        <p class="footer-meta">本網站內容與素材版權歸所有權人或各權利人所有，未經授權請勿任意轉載或使用。</p>
       </div>
     </div>
-    <div class="-bottom">
+    <div class="footer-bottom">
       © 2026 經濟部商業發展署 Administration of Commerce, MOEA. All Rights Reserved.
     </div>
-  </>
+  </footer>
 
   <div class="modal" id="videoModal" aria-hidden="true">
     <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -844,20 +832,26 @@
         id: "a",
         anchor: "plan-a",
         shortName: "計畫A",
-        name: "計畫A｜請填入正式計畫名稱",
+        name: "商業服務業減碳指引",
         description: "請在此填入計畫A簡介文字，建議控制在 300 字以內。\n可說明計畫背景、推動目的、執行內容與重點成果，讓使用者能快速理解本計畫的核心資訊。",
-        image: "plana.png",
+        image: "assets/plana.png",
         videos: [
           {
-            title: "計畫A｜影片標題 1",
-            url: "https://www.youtube.com/watch?v=114-pmQVsq8",
-            description: "請在此填入影片說明文字，簡要說明影片內容與重點。",
+            title: "商業服務業減碳指引｜餐飲業低碳指引",
+            url: "https://youtu.be/Cf0BjXfLmwc?si=wWc4jZLknnxEz2Og",
+            description: "因應淨零趨勢，經濟部商業發展署推動餐飲業低碳經營指引，結合案例與影音教材，協助餐飲業者及早布局減碳策略。",
             thumbnail: ""
           },
           {
-            title: "計畫A｜影片標題 2",
-            url: "https://www.youtube.com/watch?v=114-pmQVsq8",
-            description: "第二支影片說明文字。",
+            title: "商業服務業減碳指引｜美髮業節能指引",
+            url: "https://youtu.be/bchk1H71OPA?si=NBDTIwuT2Z9QHYhi",
+            description: "經濟部商業發展署以影音建立美髮沙龍低碳經營指引，協助業者檢視並落實可行的節能減碳方案。",
+            thumbnail: ""
+          },
+	  {
+            title: "商業服務業減碳指引｜零售業低碳指引",
+            url: "https://youtu.be/YZsndgdxlJ0?si=BhPFv67GSUwoXu8Y",
+            description: "經濟部商業發展署推動零售業低碳經營指引，協助業者從場域環境與產品服務兩面向落實節能減碳。",
             thumbnail: ""
           }
         ]
@@ -868,7 +862,7 @@
         shortName: "計畫B",
         name: "計畫B｜請填入正式計畫名稱",
         description: "請在此填入計畫B簡介文字，建議控制在 300 字以內。\n可放入計畫目標、工作內容、服務範圍或成果亮點，維持簡潔但具辨識度。",
-        image: "planb.jpg",
+        image: "assets/planb.jpg",
         videos: [
           {
             title: "計畫B｜影片標題 1",
@@ -896,7 +890,7 @@
         shortName: "計畫C",
         name: "計畫C｜請填入正式計畫名稱",
         description: "請在此填入計畫C簡介文字，建議控制在 300 字以內。\n此處可說明本計畫的定位、執行方式、特色與預期效益，讓內容更完整。",
-        image: "planc.jpg",
+        image: "assets/planc.jpg",
         videos: [
           {
             title: "計畫C｜影片標題 1",
@@ -980,7 +974,6 @@
           <article class="video-card">
             <div class="video-thumb">
               <img src="${getVideoThumbnail(video)}" alt="${video.title}" loading="lazy">
-              
             </div>
             <div class="video-body">
               <h4>${video.title}</h4>
