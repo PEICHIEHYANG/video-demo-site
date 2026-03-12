@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>建構數位永續生態系</title>
+  <meta name="description" content="建構數位永續生態系三項計畫展示網站" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#f5faf8;
+      --surface:#ffffff;
+      --surface-soft:#eef7f4;
+      --primary:#138c7a;
+      --primary-dark:#0e6a5d;
+      --accent:#2e86de;
+      --text:#1d3530;
+      --muted:#637973;
+      --border:#d9eae5;
+      --shadow:0 18px 48px rgba(17,108,94,.10);
+      --shadow-sm:0 8px 24px rgba(17,108,94,.08);
+      --radius:20px;
+      --container:min(1180px, calc(100% - 32px));
+      --nav-h:82px;
+      --gradient:linear-gradient(135deg, #16a085 0%, #3da0db 100%);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Noto Sans TC', sans-serif;
+      color:var(--text);
+      background:linear-gradient(180deg,#f8fcfb 0%, #f5faf8 100%);
+      line-height:1.7;
+    }
+    img{display:block;max-width:100%}
+    a{text-decoration:none;color:inherit}
+    button{font:inherit;cursor:pointer}
+    section{scroll-margin-top:100px}
+    .container{width:var(--container);margin:0 auto}
+
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      backdrop-filter:blur(14px);
+      background:rgba(255,255,255,.92);
+      border-bottom:1px solid rgba(217,234,229,.95);
+    }
+    .nav{
+      min-height:var(--nav-h);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+      position:relative;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      min-width:0;
+      flex:1;
+    }
+    .brand-logo{
+      height:44px;
+      width:auto;
+      object-fit:contain;
+      flex:0 0 auto;
+    }
+    .brand-title{
+      font-size:1.18rem;
+      font-weight:800;
+      color:var(--text);
+      white-space:nowrap;
+    }
+
+    .menu-toggle{
+      display:none;
+      border:1px solid var(--border);
+      background:#fff;
+      padding:10px 12px;
+      border-radius:12px;
+      color:var(--primary-dark);
+      font-weight:700;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .nav-links a{
+      padding:10px 14px;
+      border-radius:999px;
+      color:var(--muted);
+      transition:.2s ease;
+      font-weight:600;
+    }
+    .nav-links a:hover,
+    .nav-links a:focus-visible{
+      background:#eef8f5;
+      color:var(--primary-dark);
+      outline:none;
+    }
+    .nav-links a.is-primary{
+      background:var(--gradient);
+      color:#fff;
+      box-shadow:var(--shadow-sm);
+    }
+
+    .hero{
+      padding:48px 0 42px;
+    }
+    .hero-box{
+      background:
+        radial-gradient(circle at top right, rgba(61,160,219,.10), transparent 26%),
+        radial-gradient(circle at left bottom, rgba(22,160,133,.10), transparent 24%),
+        var(--surface);
+      border:1px solid var(--border);
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      padding:42px;
+      display:grid;
+      grid-template-columns:minmax(420px, 1fr) minmax(320px, 520px);
+      gap:36px;
+      align-items:center;
+      overflow:hidden;
+    }
+    .hero-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      background:#eef9f6;
+      border:1px solid #d9eee8;
+      color:var(--primary-dark);
+      font-size:.84rem;
+      font-weight:700;
+      margin-bottom:18px;
+      letter-spacing:.08em;
+    }
+    .hero-kicker::before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--primary);
+    }
+    .hero h1{
+      margin:0 0 18px;
+      font-family:'Noto Serif TC', serif;
+      font-size:clamp(2.6rem, 5vw, 4.8rem);
+      line-height:1.15;
+      letter-spacing:.02em;
+    }
+    .hero p{
+      margin:0 0 30px;
+      color:var(--muted);
+      max-width:26ch;
+      font-size:1.05rem;
+    }
+    .hero-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .hero-media{
+      position:relative;
+      min-height:520px;
+      border-radius:28px;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at center, rgba(92,189,203,.12) 0%, rgba(92,189,203,.06) 35%, rgba(92,189,203,.02) 60%, transparent 78%),
+        linear-gradient(135deg, #eef8f6 0%, #edf7fb 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .hero-media::before{
+      content:"";
+      position:absolute;
+      inset:6% 4%;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(122,201,214,.12) 0%, rgba(122,201,214,.06) 52%, rgba(122,201,214,0) 75%);
+      z-index:0;
+    }
+    .hero-banner-image{
+      position:relative;
+      z-index:1;
+      width:88%;
+      max-width:540px;
+      max-height:420px;
+      object-fit:contain;
+      filter:drop-shadow(0 18px 28px rgba(45, 170, 198, .18));
+    }
+
+    .section-head{
+      margin-bottom:20px;
+    }
+    .section-head h2{
+      margin:0 0 8px;
+      font-family:'Noto Serif TC', serif;
+      font-size:clamp(1.6rem,2.6vw,2.2rem);
+    }
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .overview{
+      padding:8px 0 48px;
+    }
+    .overview-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .overview-card{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:22px;
+      box-shadow:var(--shadow-sm);
+      overflow:hidden;
+      transition:.2s ease;
+    }
+    .overview-card:hover{
+      transform:translateY(-3px);
+      box-shadow:var(--shadow);
+    }
+    .overview-image{
+      aspect-ratio:16/9;
+      background:linear-gradient(135deg,#d8eee8,#dcecf9);
+      overflow:hidden;
+    }
+    .overview-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .overview-body{
+      padding:20px;
+    }
+    .overview-body h3{
+      margin:0 0 8px;
+      font-size:1.08rem;
+    }
+    .overview-body p{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-size:.94rem;
+      display:-webkit-box;
+      -webkit-line-clamp:4;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+
+    .card-link,
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 18px;
+      border-radius:999px;
+      font-weight:700;
+      transition:.2s ease;
+      border:none;
+    }
+    .btn:hover,
+    .card-link:hover{
+      transform:translateY(-2px);
+    }
+    .btn-primary{
+      background:var(--gradient);
+      color:#fff;
+      box-shadow:var(--shadow-sm);
+    }
+    .btn-secondary,
+    .card-link{
+      background:#fff;
+      border:1px solid #cfe6e1;
+      color:var(--primary-dark);
+    }
+
+    .plan-section{
+      padding:24px 0 56px;
+    }
+    .plan-box{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:30px;
+    }
+    .plan-top{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:28px;
+      align-items:start;
+      margin-bottom:28px;
+    }
+    .plan-image{
+      border-radius:22px;
+      overflow:hidden;
+      background:linear-gradient(135deg,#d7efe8,#dbeaf8);
+      border:1px solid #deeeea;
+    }
+    .plan-image img{
+      width:100%;
+      aspect-ratio:16/10;
+      object-fit:cover;
+    }
+    .plan-content .plan-tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      background:#eef9f6;
+      border:1px solid #d8ece7;
+      color:var(--primary-dark);
+      font-size:.82rem;
+      font-weight:700;
+      margin-bottom:12px;
+    }
+    .plan-content h2{
+      margin:0 0 12px;
+      font-family:'Noto Serif TC', serif;
+      font-size:clamp(1.8rem,3vw,2.5rem);
+      line-height:1.25;
+    }
+    .plan-content p{
+      margin:0;
+      color:var(--muted);
+      white-space:pre-line;
+      font-size:1rem;
+    }
+
+    .video-area-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+    .video-area-head h3{
+      margin:0;
+      font-size:1.25rem;
+    }
+    .video-area-head span{
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    .video-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .video-card{
+      background:#fbfefd;
+      border:1px solid #e1efeb;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:var(--shadow-sm);
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
+    }
+    .video-thumb{
+      position:relative;
+      aspect-ratio:16/9;
+      background:linear-gradient(135deg,#d7efe8,#dcecf8);
+      overflow:hidden;
+    }
+    .video-thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .video-play{
+      position:absolute;
+      left:16px;
+      bottom:16px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.94);
+      color:var(--primary-dark);
+      font-weight:700;
+      box-shadow:0 8px 20px rgba(0,0,0,.08);
+    }
+    .video-body{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      flex:1;
+    }
+    .video-body h4{
+      margin:0 0 8px;
+      font-size:1rem;
+      line-height:1.5;
+    }
+    .video-body p{
+      margin:0 0 16px;
+      color:var(--muted);
+      font-size:.92rem;
+      flex:1;
+    }
+
+    .site-footer{
+      margin-top:10px;
+      background:#f7f9f8;
+      border-top:3px solid var(--primary);
+    }
+    .footer-main{
+      width:var(--container);
+      margin:0 auto;
+      padding:30px 0 34px;
+      display:grid;
+      grid-template-columns:460px 1px minmax(0,1fr);
+      gap:32px;
+      align-items:center;
+    }
+    .footer-logo-area{
+      display:flex;
+      align-items:center;
+      gap:20px;
+      min-height:120px;
+    }
+    .footer-logo-wrap{
+      min-width:240px;
+      min-height:72px;
+      background:transparent;
+      border:none;
+      border-radius:0;
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      padding:0;
+      flex:0 0 auto;
+    }
+    .footer-logo{
+      width:218px;
+      min-width:218px;
+      height:auto;
+      max-width:none;
+      max-height:none;
+      object-fit:contain;
+      display:block;
+    }
+    .footer-org{
+      min-width:0;
+    }
+    .footer-org .name{
+      font-size:2rem;
+      font-weight:800;
+      color:var(--text);
+      line-height:1.25;
+      letter-spacing:.01em;
+      word-break:break-word;
+    }
+    .footer-div{
+      width:1px;
+      height:100%;
+      min-height:130px;
+      background:#d5e7e2;
+    }
+    .footer-info{
+      min-width:0;
+    }
+    .footer-copy{
+      font-size:1rem;
+      font-weight:800;
+      color:var(--text);
+      margin-bottom:8px;
+    }
+    .footer-meta{
+      color:var(--muted);
+      font-size:.98rem;
+      line-height:1.9;
+    }
+    .footer-bottom{
+      background:var(--primary-dark);
+      color:rgba(255,255,255,.78);
+      text-align:center;
+      font-size:.78rem;
+      padding:11px 16px;
+      letter-spacing:.02em;
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      place-items:center;
+      background:rgba(8,25,22,.76);
+      backdrop-filter:blur(8px);
+      padding:18px;
+      z-index:2000;
+    }
+    .modal.is-open{display:grid}
+    .modal-dialog{
+      width:min(960px,100%);
+      background:#071715;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:24px;
+      overflow:hidden;
+      box-shadow:0 28px 80px rgba(0,0,0,.36);
+    }
+    .modal-head,
+    .modal-foot{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:16px 18px;
+      color:#d6f2ec;
+    }
+    .modal-head{
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .modal-foot{
+      border-top:1px solid rgba(255,255,255,.08);
+      flex-wrap:wrap;
+    }
+    .modal-head strong{
+      font-size:1rem;
+      line-height:1.5;
+    }
+    .modal-close,
+    .modal-nav button{
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      border-radius:999px;
+      padding:10px 14px;
+    }
+    .modal-body{
+      position:relative;
+      aspect-ratio:16/9;
+      background:#000;
+    }
+    .modal-body iframe,
+    .modal-body video{
+      width:100%;
+      height:100%;
+      border:0;
+      display:none;
+      background:#000;
+    }
+    .modal-body iframe.active,
+    .modal-body video.active{
+      display:block;
+    }
+    .modal-hint{
+      color:rgba(214,242,236,.74);
+      font-size:.82rem;
+    }
+    .modal-nav{
+      display:flex;
+      gap:8px;
+    }
+
+    .back-top{
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      width:48px;
+      height:48px;
+      border:none;
+      border-radius:50%;
+      background:var(--gradient);
+      color:#fff;
+      font-size:1.1rem;
+      box-shadow:var(--shadow);
+      display:none;
+      z-index:1500;
+    }
+    .back-top.show{display:block}
+
+    :focus-visible{
+      outline:3px solid rgba(46,134,222,.24);
+      outline-offset:2px;
+    }
+
+    @media (max-width: 1080px){
+      .hero-box,
+      .plan-top{
+        grid-template-columns:1fr;
+      }
+      .hero-media{
+        min-height:380px;
+      }
+      .overview-grid,
+      .video-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+      .footer-main{
+        grid-template-columns:1fr;
+        gap:20px;
+      }
+      .footer-div{
+        width:100%;
+        height:1px;
+        min-height:1px;
+      }
+    }
+
+    @media (max-width: 760px){
+      .nav{
+        min-height:72px;
+        padding:12px 0;
+      }
+      .menu-toggle{display:inline-flex}
+      .nav-links{
+        position:absolute;
+        top:calc(100% + 8px);
+        left:0;
+        right:0;
+        display:none;
+        flex-direction:column;
+        align-items:stretch;
+        background:#fff;
+        border:1px solid var(--border);
+        border-radius:18px;
+        padding:10px;
+        box-shadow:var(--shadow);
+      }
+      .nav-links.open{display:flex}
+      .brand-logo{
+        height:36px;
+      }
+      .brand-title{
+        font-size:1rem;
+        white-space:normal;
+      }
+      .hero{
+        padding-top:28px;
+      }
+      .hero-box{
+        padding:26px 22px;
+        gap:24px;
+      }
+      .hero h1{
+        font-size:clamp(2.2rem, 10vw, 3.5rem);
+      }
+      .hero p{
+        max-width:none;
+      }
+      .hero-actions{
+        gap:10px;
+      }
+      .hero-media{
+        min-height:260px;
+        border-radius:22px;
+      }
+      .hero-banner-image{
+        width:84%;
+        max-height:220px;
+      }
+      .overview-grid,
+      .video-grid{
+        grid-template-columns:1fr;
+      }
+      .plan-box{
+        padding:22px;
+      }
+      .footer-main{
+        padding:22px 0;
+      }
+      .footer-logo-area{
+        align-items:flex-start;
+        min-height:auto;
+        flex-direction:column;
+      }
+      .footer-logo-wrap{
+        width:180px;
+        height:96px;
+      }
+      .footer-org .name{
+        font-size:1.65rem;
+      }
+      .footer-meta{
+        font-size:.92rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#top" class="brand" aria-label="回到首頁">
+        <img class="brand-logo" src="橫式_0731.png" alt="經濟部商業發展署" />
+        <div class="brand-title">建構數位永續生態系</div>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="navLinks">
+        選單
+      </button>
+
+      <nav class="nav-links" id="navLinks" aria-label="主選單">
+        <a class="is-primary" href="#overview">計畫總覽</a>
+        <a href="#plan-a">計畫A</a>
+        <a href="#plan-b">計畫B</a>
+        <a href="#plan-c">計畫C</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero container">
+      <div class="hero-box">
+        <div class="hero-content">
+          <div class="hero-kicker">DIGITAL SUSTAINABILITY</div>
+          <h1>建構數位永續<br>生態系</h1>
+          <p>
+            推動數位轉型與永續發展，整合三大計畫資源，
+            共創韌性數位生態系統。
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#overview">探索計畫</a>
+            
+          </div>
+        </div>
+
+        <div class="hero-media">
+          <img class="hero-banner-image" src="banner-home.png" alt="首頁主視覺圖片" />
+        </div>
+      </div>
+    </section>
+
+    <section class="overview container" id="overview">
+      <div class="section-head">
+        <h2>計畫總覽</h2>
+        <p></p>
+      </div>
+      <div class="overview-grid" id="overviewGrid"></div>
+    </section>
+
+    <section class="plan-section container" id="plan-a">
+      <div class="plan-box">
+        <div class="plan-top" id="planAContent"></div>
+        <div class="video-area">
+          <div class="video-area-head">
+            <h3>計畫A｜影片素材</h3>
+            <span></span>
+          </div>
+          <div class="video-grid" id="planAVideos"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="plan-section container" id="plan-b">
+      <div class="plan-box">
+        <div class="plan-top" id="planBContent"></div>
+        <div class="video-area">
+          <div class="video-area-head">
+            <h3>計畫B｜影片素材</h3>
+            <span></span>
+          </div>
+          <div class="video-grid" id="planBVideos"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="plan-section container" id="plan-c">
+      <div class="plan-box">
+        <div class="plan-top" id="planCContent"></div>
+        <div class="video-area">
+          <div class="video-area-head">
+            <h3>計畫C｜影片素材</h3>
+            <span></span>
+          </div>
+          <div class="video-grid" id="planCVideos"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-logo-area">
+        <div class="footer-logo-wrap">
+          <img class="footer-logo" src="橫式_0731.png" alt="經濟部商業發展署" />
+        </div>
+        <div class="footer-org">
+          <div class="name"></div>
+        </div>
+      </div>
+
+      <div class="footer-div"></div>
+
+      <div class="footer-info">
+        <div class="footer-copy">所有權人：經濟部商業發展署</div>
+        <div class="footer-meta">
+          地址：100210 臺北市中正區福州街15號<br>
+          總機：02-2343-3300　<br>
+          本網站內容與素材版權歸所有權人或各權利人所有，未經授權請勿任意轉載或使用。
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 經濟部商業發展署 Administration of Commerce, MOEA. All Rights Reserved.
+    </div>
+  </footer>
+
+  <div class="modal" id="videoModal" aria-hidden="true">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <strong id="modalTitle">影片播放</strong>
+        <button type="button" class="modal-close" id="modalClose" aria-label="關閉影片">關閉</button>
+      </div>
+
+      <div class="modal-body">
+        <iframe id="modalIframe" title="YouTube 影片播放器" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <video id="modalVideo" controls controlsList="nodownload" playsinline></video>
+      </div>
+
+      <div class="modal-foot">
+        <div class="modal-hint"></div>
+        <div class="modal-nav">
+          <button type="button" id="modalPrev">上一支</button>
+          <button type="button" id="modalNext">下一支</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="back-top" id="backTop" type="button" aria-label="回到頂端">↑</button>
+
+  <script>
+    const PLANS = [
+      {
+        id: "a",
+        anchor: "plan-a",
+        shortName: "計畫A",
+        name: "計畫A｜請填入正式計畫名稱",
+        description: "請在此填入計畫A簡介文字，建議控制在 300 字以內。\n可說明計畫背景、推動目的、執行內容與重點成果，讓使用者能快速理解本計畫的核心資訊。",
+        image: "plana.png",
+        videos: [
+          {
+            title: "計畫A｜影片標題 1",
+            url: "https://www.youtube.com/watch?v=114-pmQVsq8",
+            description: "請在此填入影片說明文字，簡要說明影片內容與重點。",
+            thumbnail: ""
+          },
+          {
+            title: "計畫A｜影片標題 2",
+            url: "https://www.youtube.com/watch?v=114-pmQVsq8",
+            description: "第二支影片說明文字。",
+            thumbnail: ""
+          }
+        ]
+      },
+      {
+        id: "b",
+        anchor: "plan-b",
+        shortName: "計畫B",
+        name: "計畫B｜請填入正式計畫名稱",
+        description: "請在此填入計畫B簡介文字，建議控制在 300 字以內。\n可放入計畫目標、工作內容、服務範圍或成果亮點，維持簡潔但具辨識度。",
+        image: "planb.jpg",
+        videos: [
+          {
+            title: "計畫B｜影片標題 1",
+            url: "https://youtu.be/NvDkY-yabC4?si=gnuyzQ9wK8-TOBqK",
+            description: "請在此填入影片說明文字。",
+            thumbnail: ""
+          },
+          {
+            title: "計畫B｜影片標題 2",
+            url: "https://www.youtube.com/watch?v=114-pmQVsq8",
+            description: "第二支影片說明文字。",
+            thumbnail: ""
+          },
+          {
+            title: "計畫B｜影片標題 3",
+            url: "https://www.youtube.com/watch?v=114-pmQVsq8",
+            description: "第三支影片說明文字。",
+            thumbnail: ""
+          }
+        ]
+      },
+      {
+        id: "c",
+        anchor: "plan-c",
+        shortName: "計畫C",
+        name: "計畫C｜請填入正式計畫名稱",
+        description: "請在此填入計畫C簡介文字，建議控制在 300 字以內。\n此處可說明本計畫的定位、執行方式、特色與預期效益，讓內容更完整。",
+        image: "planc.jpg",
+        videos: [
+          {
+            title: "計畫C｜影片標題 1",
+            url: "https://www.youtube.com/watch?v=114-pmQVsq8",
+            description: "請在此填入影片說明文字。",
+            thumbnail: ""
+          }
+        ]
+      }
+    ];
+
+    const overviewGrid = document.getElementById("overviewGrid");
+
+    function getPlanContentTemplate(plan){
+      return `
+        <div class="plan-image">
+          <img src="${plan.image}" alt="${plan.name}" loading="lazy">
+        </div>
+        <div class="plan-content">
+          <div class="plan-tag">${plan.shortName}</div>
+          <h2>${plan.name}</h2>
+          <p>${plan.description}</p>
+        </div>
+      `;
+    }
+
+    function getYoutubeId(url){
+      try{
+        const parsed = new URL(url);
+        if(parsed.hostname.includes("youtube.com")){
+          return parsed.searchParams.get("v") || "";
+        }
+        if(parsed.hostname.includes("youtu.be")){
+          return parsed.pathname.replace("/", "") || "";
+        }
+      }catch(error){}
+      return "";
+    }
+
+    function getVideoType(url){
+      const youtubeId = getYoutubeId(url);
+      if(youtubeId) return "youtube";
+      if(url.toLowerCase().endsWith(".mp4")) return "mp4";
+      return "unknown";
+    }
+
+    function getVideoThumbnail(video){
+      if(video.thumbnail && video.thumbnail.trim() !== ""){
+        return video.thumbnail;
+      }
+      const youtubeId = getYoutubeId(video.url);
+      if(youtubeId){
+        return `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`;
+      }
+      return "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1200&q=80";
+    }
+
+    function renderOverview(){
+      overviewGrid.innerHTML = PLANS.map(plan => `
+        <article class="overview-card">
+          <div class="overview-image">
+            <img src="${plan.image}" alt="${plan.name}" loading="lazy">
+          </div>
+          <div class="overview-body">
+            <h3>${plan.name}</h3>
+            <p>${plan.description}</p>
+            <a class="card-link" href="#${plan.anchor}">查看內容</a>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function renderPlanSections(){
+      PLANS.forEach(plan => {
+        const contentEl = document.getElementById(`plan${plan.id.toUpperCase()}Content`);
+        const videosEl = document.getElementById(`plan${plan.id.toUpperCase()}Videos`);
+
+        contentEl.innerHTML = getPlanContentTemplate(plan);
+
+        videosEl.innerHTML = plan.videos.map((video, index) => `
+          <article class="video-card">
+            <div class="video-thumb">
+              <img src="${getVideoThumbnail(video)}" alt="${video.title}" loading="lazy">
+              
+            </div>
+            <div class="video-body">
+              <h4>${video.title}</h4>
+              <p>${video.description}</p>
+              <button
+                class="btn btn-primary"
+                type="button"
+                data-plan="${plan.id}"
+                data-index="${index}">
+                播放
+              </button>
+            </div>
+          </article>
+        `).join("");
+      });
+    }
+
+    let activePlanId = null;
+    let activeVideoIndex = 0;
+
+    const modal = document.getElementById("videoModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalClose = document.getElementById("modalClose");
+    const modalPrev = document.getElementById("modalPrev");
+    const modalNext = document.getElementById("modalNext");
+    const modalIframe = document.getElementById("modalIframe");
+    const modalVideo = document.getElementById("modalVideo");
+
+    function updateModalButtons(){
+      const plan = PLANS.find(item => item.id === activePlanId);
+      if(!plan) return;
+      modalPrev.disabled = activeVideoIndex === 0;
+      modalNext.disabled = activeVideoIndex === plan.videos.length - 1;
+    }
+
+    function openVideo(planId, index){
+      const plan = PLANS.find(item => item.id === planId);
+      if(!plan) return;
+
+      const video = plan.videos[index];
+      activePlanId = planId;
+      activeVideoIndex = index;
+
+      modalTitle.textContent = `${plan.shortName}｜${video.title}`;
+
+      modalIframe.classList.remove("active");
+      modalVideo.classList.remove("active");
+      modalIframe.src = "";
+      modalVideo.pause();
+      modalVideo.removeAttribute("src");
+
+      const type = getVideoType(video.url);
+
+      if(type === "youtube"){
+        const youtubeId = getYoutubeId(video.url);
+        modalIframe.src = `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`;
+        modalIframe.classList.add("active");
+      }else if(type === "mp4"){
+        modalVideo.src = video.url;
+        modalVideo.classList.add("active");
+        modalVideo.play().catch(() => {});
+      }else{
+        alert("目前僅支援 YouTube、youtu.be 或 mp4 影片連結。");
+        return;
+      }
+
+      updateModalButtons();
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal(){
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      modalIframe.src = "";
+      modalVideo.pause();
+      modalVideo.removeAttribute("src");
+      modalIframe.classList.remove("active");
+      modalVideo.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+
+    document.addEventListener("click", (event) => {
+      const target = event.target.closest("[data-plan][data-index]");
+      if(target){
+        openVideo(target.dataset.plan, Number(target.dataset.index));
+      }
+    });
+
+    modalClose.addEventListener("click", closeModal);
+
+    modal.addEventListener("click", (event) => {
+      if(event.target === modal) closeModal();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if(event.key === "Escape" && modal.classList.contains("is-open")){
+        closeModal();
+      }
+    });
+
+    modalPrev.addEventListener("click", () => {
+      const plan = PLANS.find(item => item.id === activePlanId);
+      if(!plan) return;
+      if(activeVideoIndex > 0){
+        openVideo(activePlanId, activeVideoIndex - 1);
+      }
+    });
+
+    modalNext.addEventListener("click", () => {
+      const plan = PLANS.find(item => item.id === activePlanId);
+      if(!plan) return;
+      if(activeVideoIndex < plan.videos.length - 1){
+        openVideo(activePlanId, activeVideoIndex + 1);
+      }
+    });
+
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const backTop = document.getElementById("backTop");
+    window.addEventListener("scroll", () => {
+      if(window.scrollY > 500){
+        backTop.classList.add("show");
+      }else{
+        backTop.classList.remove("show");
+      }
+    });
+
+    backTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    renderOverview();
+    renderPlanSections();
+  </script>
+</body>
+</html>
