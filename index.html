@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>建構數位永續生態系</title>
-  <meta name="description" content="建構數位永續生態系三項計畫展示網站" />
+  <meta name="description" content="建構數位永續生態系" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet" />
@@ -39,7 +39,7 @@
     img{display:block;max-width:100%}
     a{text-decoration:none;color:inherit}
     button{font:inherit;cursor:pointer}
-    section{scroll-margin-top:100px}
+    section{scroll-margin-top:110px}
     .container{width:var(--container);margin:0 auto}
 
     .site-header{
@@ -47,7 +47,7 @@
       top:0;
       z-index:1000;
       backdrop-filter:blur(14px);
-      background:rgba(255,255,255,.92);
+      background:rgba(255,255,255,.94);
       border-bottom:1px solid rgba(217,234,229,.95);
     }
     .nav{
@@ -66,7 +66,7 @@
       flex:1;
     }
     .brand-logo{
-      height:44px;
+      height:50px;
       width:auto;
       object-fit:contain;
       flex:0 0 auto;
@@ -95,11 +95,11 @@
       flex-wrap:wrap;
     }
     .nav-links a{
-      padding:10px 14px;
+      padding:10px 16px;
       border-radius:999px;
       color:var(--muted);
       transition:.2s ease;
-      font-weight:600;
+      font-weight:700;
     }
     .nav-links a:hover,
     .nav-links a:focus-visible{
@@ -180,9 +180,6 @@
       align-items:center;
       justify-content:center;
     }
-    .hero-media::before{
-      display:none;
-    }
     .hero-banner-image{
       position:relative;
       z-index:1;
@@ -201,17 +198,13 @@
       font-family:'Noto Serif TC', serif;
       font-size:clamp(1.6rem,2.6vw,2.2rem);
     }
-    .section-head p{
-      margin:0;
-      color:var(--muted);
-    }
 
     .overview{
       padding:8px 0 48px;
     }
     .overview-grid{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
+      grid-template-columns:repeat(2,1fr);
       gap:18px;
     }
     .overview-card{
@@ -281,21 +274,21 @@
     }
 
     .plan-section{
-      padding:24px 0 56px;
+      padding:24px 0 48px;
     }
     .plan-box{
       background:var(--surface);
       border:1px solid var(--border);
       border-radius:28px;
       box-shadow:var(--shadow);
-      padding:30px;
+      padding:28px;
     }
     .plan-top{
       display:grid;
       grid-template-columns:1.05fr .95fr;
       gap:28px;
       align-items:start;
-      margin-bottom:28px;
+      margin-bottom:24px;
     }
     .plan-image{
       border-radius:22px;
@@ -307,19 +300,6 @@
       width:100%;
       aspect-ratio:16/10;
       object-fit:cover;
-    }
-    .plan-content .plan-tag{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 14px;
-      border-radius:999px;
-      background:#eef9f6;
-      border:1px solid #d8ece7;
-      color:var(--primary-dark);
-      font-size:.82rem;
-      font-weight:700;
-      margin-bottom:12px;
     }
     .plan-content h2{
       margin:0 0 12px;
@@ -334,6 +314,160 @@
       font-size:1rem;
     }
 
+    .subplans-wrap{
+      margin-top:24px;
+    }
+    .subplans-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:14px;
+      flex-wrap:wrap;
+    }
+    .subplans-head h3{
+      margin:0;
+      font-size:1.25rem;
+    }
+    .subplans-head p{
+      margin:0;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+    .subplans{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:18px;
+    }
+    .subplan-card{
+      background:#fbfefd;
+      border:1px solid #dfeee9;
+      border-radius:22px;
+      box-shadow:var(--shadow-sm);
+      overflow:hidden;
+      transition:.2s ease;
+      cursor:pointer;
+    }
+    .subplan-card:hover{
+      transform:translateY(-2px);
+      box-shadow:var(--shadow);
+      border-color:#cfe6df;
+    }
+    .subplan-card:focus-visible{
+      outline:3px solid rgba(46,134,222,.24);
+      outline-offset:2px;
+    }
+    .subplan-title{
+      padding:18px 22px 14px;
+      border-bottom:1px solid #e3f0ec;
+      font-size:clamp(1.15rem,2vw,1.45rem);
+      line-height:1.5;
+      font-weight:800;
+      color:var(--text);
+      background:#fff;
+    }
+    .subplan-body{
+      display:grid;
+      grid-template-columns:minmax(340px, 420px) minmax(0, 1fr);
+      min-height:300px;
+    }
+    .subplan-gallery{
+      position:relative;
+      border-right:1px solid #e3f0ec;
+      background:#f3faf7;
+      padding:22px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+    .gallery-frame{
+      width:100%;
+      height:100%;
+      min-height:230px;
+      border-radius:16px;
+      background:linear-gradient(135deg,#e5f5ef,#e7f2fb);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .gallery-image{
+      width:100%;
+      height:100%;
+      max-height:260px;
+      object-fit:contain;
+      display:none;
+      user-select:none;
+      pointer-events:none;
+    }
+    .gallery-image.is-active{
+      display:block;
+    }
+    .gallery-arrow{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:40px;
+      height:40px;
+      border:none;
+      border-radius:50%;
+      background:rgba(255,255,255,.94);
+      color:var(--primary-dark);
+      box-shadow:0 8px 18px rgba(0,0,0,.12);
+      font-size:1rem;
+      font-weight:800;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:3;
+    }
+    .gallery-arrow.prev{
+      left:12px;
+    }
+    .gallery-arrow.next{
+      right:12px;
+    }
+    .gallery-dots{
+      position:absolute;
+      left:50%;
+      bottom:14px;
+      transform:translateX(-50%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      z-index:3;
+    }
+    .gallery-dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      border:none;
+      background:rgba(19,140,122,.25);
+      padding:0;
+    }
+    .gallery-dot.is-active{
+      background:var(--primary);
+    }
+    .subplan-text{
+      padding:22px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      background:#fff;
+    }
+    .subplan-text p{
+      margin:0;
+      font-size:1rem;
+      line-height:1.95;
+      color:var(--muted);
+    }
+
+    .video-area{
+      margin-top:28px;
+    }
     .video-area-head{
       display:flex;
       align-items:end;
@@ -345,10 +479,6 @@
     .video-area-head h3{
       margin:0;
       font-size:1.25rem;
-    }
-    .video-area-head span{
-      color:var(--muted);
-      font-size:.92rem;
     }
 
     .video-grid{
@@ -365,6 +495,11 @@
       display:flex;
       flex-direction:column;
       min-height:100%;
+      scroll-margin-top:120px;
+    }
+    .video-card.is-highlighted{
+      border-color:#8fd4c6;
+      box-shadow:0 0 0 3px rgba(19,140,122,.10), var(--shadow);
     }
     .video-thumb{
       position:relative;
@@ -377,20 +512,6 @@
       height:100%;
       object-fit:cover;
     }
-    .video-play{
-      position:absolute;
-      left:16px;
-      bottom:16px;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.94);
-      color:var(--primary-dark);
-      font-weight:700;
-      box-shadow:0 8px 20px rgba(0,0,0,.08);
-    }
     .video-body{
       padding:18px;
       display:flex;
@@ -400,7 +521,7 @@
     .video-body h4{
       margin:0 0 8px;
       font-size:1rem;
-      line-height:1.5;
+      line-height:1.6;
     }
     .video-body p{
       margin:0 0 16px;
@@ -410,17 +531,17 @@
     }
 
     .site-footer{
-      margin-top:10px;
+      margin-top:8px;
       background:#f7f9f8;
       border-top:3px solid var(--primary);
     }
     .footer-main{
-      width:var(--container);
+      width:min(1080px, calc(100% - 32px));
       margin:0 auto;
-      padding:26px 0 28px;
+      padding:14px 0 16px;
       display:grid;
-      grid-template-columns:minmax(220px, 340px) minmax(0,1fr);
-      gap:32px;
+      grid-template-columns:minmax(180px, 250px) minmax(0,1fr);
+      gap:18px;
       align-items:center;
     }
     .footer-logo-area{
@@ -436,54 +557,50 @@
       padding:0;
     }
     .footer-logo{
-      width:min(100%, 320px);
+      width:min(100%, 230px);
       height:auto;
       object-fit:contain;
       display:block;
-    }
-    .footer-org,
-    .footer-div{
-      display:none;
     }
     .footer-info{
       min-width:0;
       display:flex;
       flex-direction:column;
-      gap:10px;
+      gap:6px;
     }
     .footer-info-top{
       display:flex;
       align-items:center;
-      gap:32px;
+      gap:24px;
       flex-wrap:wrap;
     }
     .footer-copy{
-      font-size:1rem;
+      font-size:.95rem;
       font-weight:800;
       color:var(--text);
-      line-height:1.5;
+      line-height:1.45;
       white-space:nowrap;
     }
     .footer-phone,
     .footer-address{
-      font-size:1rem;
+      font-size:.95rem;
       font-weight:500;
       color:var(--muted);
-      line-height:1.5;
+      line-height:1.45;
       white-space:nowrap;
     }
     .footer-meta{
       margin:0;
       color:var(--muted);
-      font-size:.98rem;
-      line-height:1.8;
+      font-size:.9rem;
+      line-height:1.65;
     }
     .footer-bottom{
       background:var(--primary-dark);
       color:rgba(255,255,255,.78);
       text-align:center;
       font-size:.78rem;
-      padding:11px 16px;
+      padding:10px 16px;
       letter-spacing:.02em;
     }
 
@@ -515,9 +632,7 @@
       padding:16px 18px;
       color:#d6f2ec;
     }
-    .modal-head{
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
+    .modal-head{border-bottom:1px solid rgba(255,255,255,.08)}
     .modal-foot{
       border-top:1px solid rgba(255,255,255,.08);
       flex-wrap:wrap;
@@ -550,10 +665,6 @@
     .modal-body iframe.active,
     .modal-body video.active{
       display:block;
-    }
-    .modal-hint{
-      color:rgba(214,242,236,.74);
-      font-size:.82rem;
     }
     .modal-nav{
       display:flex;
@@ -594,12 +705,19 @@
       .video-grid{
         grid-template-columns:repeat(2,1fr);
       }
+      .subplan-body{
+        grid-template-columns:1fr;
+      }
+      .subplan-gallery{
+        border-right:none;
+        border-bottom:1px solid #e3f0ec;
+      }
       .footer-main{
-        grid-template-columns:minmax(200px, 280px) minmax(0,1fr);
-        gap:24px;
+        grid-template-columns:minmax(160px, 210px) minmax(0,1fr);
+        gap:16px;
       }
       .footer-info-top{
-        gap:24px;
+        gap:16px;
       }
     }
 
@@ -625,7 +743,7 @@
       }
       .nav-links.open{display:flex}
       .brand-logo{
-        height:36px;
+        height:40px;
       }
       .brand-title{
         font-size:1rem;
@@ -662,29 +780,49 @@
       .plan-box{
         padding:22px;
       }
-      .footer-main{
-        grid-template-columns:minmax(110px, 150px) minmax(0,1fr);
-        gap:16px;
-        padding:20px 0;
+      .subplan-title{
+        padding:16px 18px 12px;
+        font-size:1.05rem;
       }
-      .footer-logo-wrap{
-        width:100%;
+      .subplan-gallery{
+        padding:16px;
+      }
+      .gallery-frame{
+        min-height:180px;
+      }
+      .gallery-image{
+        max-height:200px;
+      }
+      .subplan-text{
+        padding:18px;
+      }
+      .subplan-text p{
+        font-size:.94rem;
+        line-height:1.85;
+      }
+      .footer-main{
+        grid-template-columns:minmax(110px, 130px) minmax(0,1fr);
+        gap:12px;
+        padding:12px 0 14px;
       }
       .footer-logo{
         width:100%;
-        max-width:150px;
+        max-width:130px;
       }
       .footer-info-top{
         display:grid;
         grid-template-columns:1fr;
-        gap:8px;
+        gap:4px;
       }
       .footer-copy,
       .footer-phone,
       .footer-address,
       .footer-meta{
-        font-size:.92rem;
+        font-size:.88rem;
         white-space:normal;
+      }
+      .footer-meta{
+        line-height:1.55;
       }
     }
   </style>
@@ -694,7 +832,7 @@
   <header class="site-header">
     <div class="container nav">
       <a href="#top" class="brand" aria-label="回到首頁">
-        <img class="brand-logo" src="assets/logo.png" alt="經濟部商業發展署" />
+        <img class="brand-logo" src="logo.png" alt="建構數位永續生態系" />
         <div class="brand-title">建構數位永續生態系</div>
       </a>
 
@@ -705,8 +843,7 @@
       <nav class="nav-links" id="navLinks" aria-label="主選單">
         <a class="is-primary" href="#overview">計畫總覽</a>
         <a href="#plan-a">商業服務業減碳指引</a>
-        <a href="#plan-b">計畫B</a>
-        <a href="#plan-c">計畫C</a>
+        <a href="#plan-b">商業服務業數據驅動價值創造計畫</a>
       </nav>
     </div>
   </header>
@@ -717,10 +854,7 @@
         <div class="hero-content">
           <div class="hero-kicker">DIGITAL SUSTAINABILITY</div>
           <h1>建構數位永續<br>生態系</h1>
-          <p>
-            推動數位轉型與永續發展，整合三大計畫資源，
-            共創韌性數位生態系統。
-          </p>
+          <p>推動數位轉型與永續發展，共創韌性數位生態系統。</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#overview">探索計畫</a>
           </div>
@@ -735,7 +869,6 @@
     <section class="overview container" id="overview">
       <div class="section-head">
         <h2>計畫總覽</h2>
-        <p></p>
       </div>
       <div class="overview-grid" id="overviewGrid"></div>
     </section>
@@ -746,7 +879,6 @@
         <div class="video-area">
           <div class="video-area-head">
             <h3>商業服務業減碳指引｜影片素材</h3>
-            <span></span>
           </div>
           <div class="video-grid" id="planAVideos"></div>
         </div>
@@ -756,25 +888,20 @@
     <section class="plan-section container" id="plan-b">
       <div class="plan-box">
         <div class="plan-top" id="planBContent"></div>
-        <div class="video-area">
+	
+        <div class="subplans-wrap">
+          <div class="subplans-head">
+            <h3>計畫簡介</h3>
+
+          </div>
+          <div class="subplans" id="planBSubplans"></div>
+        </div>
+
+        <div class="video-area" id="planBVideoArea">
           <div class="video-area-head">
-            <h3>計畫B｜影片素材</h3>
-            <span></span>
+            <h3>商業服務業數據驅動價值創造計畫｜影片素材</h3>
           </div>
           <div class="video-grid" id="planBVideos"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="plan-section container" id="plan-c">
-      <div class="plan-box">
-        <div class="plan-top" id="planCContent"></div>
-        <div class="video-area">
-          <div class="video-area-head">
-            <h3>計畫C｜影片素材</h3>
-            <span></span>
-          </div>
-          <div class="video-grid" id="planCVideos"></div>
         </div>
       </div>
     </section>
@@ -787,7 +914,6 @@
           <img class="footer-logo" src="assets/橫式_0731.png" alt="經濟部商業發展署" />
         </div>
       </div>
-
       <div class="footer-info">
         <div class="footer-info-top">
           <div class="footer-copy">所有權人：經濟部商業發展署</div>
@@ -815,7 +941,7 @@
       </div>
 
       <div class="modal-foot">
-        <div class="modal-hint"></div>
+        <div></div>
         <div class="modal-nav">
           <button type="button" id="modalPrev">上一支</button>
           <button type="button" id="modalNext">下一支</button>
@@ -831,10 +957,9 @@
       {
         id: "a",
         anchor: "plan-a",
-        shortName: "計畫A",
         name: "商業服務業減碳指引",
-        description: "請在此填入計畫A簡介文字，建議控制在 300 字以內。\n可說明計畫背景、推動目的、執行內容與重點成果，讓使用者能快速理解本計畫的核心資訊。",
-        image: "assets/plana.png",
+        description: "因應我國2050淨零排放目標，服務業已正式納入溫室氣體盤查與減碳轉型的重要行列。經濟部商業發展署特編製「商業服務業節能減碳指引」，彙整相關政策規範，並系統性說明服務業在「盤查、減量、抵換與碳中和」各階段應掌握之重點，協助企業建立完整減碳管理架構，逐步落實低碳轉型與永續經營。",
+        image: "assets/下載.png",
         videos: [
           {
             title: "商業服務業減碳指引｜餐飲業低碳指引",
@@ -848,7 +973,7 @@
             description: "經濟部商業發展署以影音建立美髮沙龍低碳經營指引，協助業者檢視並落實可行的節能減碳方案。",
             thumbnail: ""
           },
-	  {
+          {
             title: "商業服務業減碳指引｜零售業低碳指引",
             url: "https://youtu.be/YZsndgdxlJ0?si=BhPFv67GSUwoXu8Y",
             description: "經濟部商業發展署推動零售業低碳經營指引，協助業者從場域環境與產品服務兩面向落實節能減碳。",
@@ -859,43 +984,58 @@
       {
         id: "b",
         anchor: "plan-b",
-        shortName: "計畫B",
-        name: "計畫B｜請填入正式計畫名稱",
-        description: "請在此填入計畫B簡介文字，建議控制在 300 字以內。\n可放入計畫目標、工作內容、服務範圍或成果亮點，維持簡潔但具辨識度。",
-        image: "assets/planb.jpg",
-        videos: [
+        name: "商業服務業數據驅動價值創造計畫",
+        description: "本計畫為經濟部商業發展署「商業服務業數據驅動價值創造計畫」（簡稱「數據驅動計畫」），為促進服務業數位轉型，辦理「商業服務業數據應用輔導」，協助業者運用AI、大數據等新興科技，結合低碳永續理念及商業數據分析，以提升營運效率、強化決策與市場拓展，發展創新且永續的商業模式，進而拓展國際市場。",
+        image: "assets/photo-drive-project.png",
+        subplans: [
           {
-            title: "計畫B｜影片標題 1",
-            url: "https://youtu.be/NvDkY-yabC4?si=gnuyzQ9wK8-TOBqK",
-            description: "請在此填入影片說明文字。",
-            thumbnail: ""
+            title: "子佳國際股份有限公司｜YAS洗鞋服務AI數據驅動與低碳價值擴散計畫",
+            description: "以「AI 鞋款辨識」、「智慧報價」及「會員標籤與戰情室模組」為核心的解決方案，透過智慧櫃串聯後台調度，打造低碳智慧洗護平台，以有效回應設備閒置、高度人力依賴、資訊不透明及低頻消費等四大營運痛點。有助於縮短顧客回訪週期、促進回購，並有效減少鞋履報廢。智慧鞋櫃、物流載具與後台系統緊密串聯，打造具備可複製性與擴散性的低碳智慧營運模式，為鞋類洗護產業樹立 AI 化與永續化的新標竿。",
+            images: ["assets/b.1.1.jpg", "assets/b.1.2.png"],
+            videoIndex: 0
           },
           {
-            title: "計畫B｜影片標題 2",
-            url: "https://www.youtube.com/watch?v=114-pmQVsq8",
-            description: "第二支影片說明文字。",
-            thumbnail: ""
+            title: "全鋒汽車股份有限公司｜AI數據驅動的跨區行車服務共享平台",
+            description: "從既有的「洗金寶」服務出發，另外建構「車美寶」與「停車寶」，並導入 AI 數據平台進行統一串接管理，以建置一個整合洗車、美容、停車等車主服務的 AI 數據驅動「跨車行服務共享平台」，串聯上游 B2B 端與下游 B2C 端，藉由電子票券整合優惠兌換，並導入 AI 消費行為分析與推薦機制，進行跨區行車服務共享平台的優惠券領取，並享受跨區洗車、美容或跨區停車服務。對於採用跨區月租停車制的車主，有效減少尋找停車位所產生的行駛距離及碳排放量。",
+            images: ["assets/b.2.1.jpg", "assets/b.2.2.png"],
+            videoIndex: 1
           },
           {
-            title: "計畫B｜影片標題 3",
-            url: "https://www.youtube.com/watch?v=114-pmQVsq8",
-            description: "第三支影片說明文字。",
-            thumbnail: ""
+            title: "萬達寵物事業股份有限公司｜寵物玩具之低碳永續AI大數據分析開發計畫",
+            description: "透過「會員寵物玩具舊換新AI精準行銷服務」、「寵物玩具AI庫存管理系統」，藉由會員行為與銷量預測，提供精確的庫存進貨建議。同時，建立二手玩具回收與新品折價券機制，以精準預測下個月可能購買玩具的會員。針對不同層級會員，設計並推播客製化的二手玩具行銷內容至官方 APP，藉此提升會員參與玩具舊換新活動的意願與比率，進而達成玩具產品生命週期延續與減少資源浪費的低碳目標。",
+            images: ["assets/b.3.1.jpg", "assets/b.3.2.png"],
+            videoIndex: 2
+          },
+          {
+            title: "客林國際股份有限公司｜低碳新美學：AI循環包裝與無紙化智慧推薦應用服務計畫",
+            description: "整合LINE Bot掃描辨識、商品影音導購、多語系說明書轉譯、顧客互動與個人化推薦模組，取代紙本DM，並提升顧客體驗。建構AI再利用箱與智慧裝箱系統，透過回收紙箱狀態辨識、庫存分類與AI裝箱推薦引擎，依據訂單SKU 與體積自動配對適用包材，並設定「裝箱空間利用率70%」以及「提升循環利用率20%」指標，降低紙箱新購與碳足跡。",
+            images: ["assets/b.4.1.jpg", "assets/b.4.2.jpg"],
+            videoIndex: 3
           }
-        ]
-      },
-      {
-        id: "c",
-        anchor: "plan-c",
-        shortName: "計畫C",
-        name: "計畫C｜請填入正式計畫名稱",
-        description: "請在此填入計畫C簡介文字，建議控制在 300 字以內。\n此處可說明本計畫的定位、執行方式、特色與預期效益，讓內容更完整。",
-        image: "assets/planc.jpg",
+        ],
         videos: [
           {
-            title: "計畫C｜影片標題 1",
-            url: "https://www.youtube.com/watch?v=114-pmQVsq8",
-            description: "請在此填入影片說明文字。",
+            title: "YAS洗鞋服務AI數據驅動與低碳價值擴散計畫｜子佳利用智慧鞋櫃高效減碳",
+            url: "https://youtu.be/NvDkY-yabC4?si=gnuyzQ9wK8-TOBqK",
+            description: "子佳國際將傳統洗鞋轉型為數位平台，推動「Y.A.S洗鞋服務AI數據驅動與低碳價值擴散計畫」。透過 AI 辨識、智慧報價與智慧鞋櫃，優化物流與服務流程，結合智慧管理與低碳價值，成功讓勞力密集產業達成數位升級與節能轉型。",
+            thumbnail: ""
+          },
+          {
+            title: "AI數據驅動的跨區行車服務共享平台｜全鋒以AI數據串聯車主生態系",
+            url: "https://www.youtube.com/watch?v=9tD5kbzDxRA",
+            description: "全鋒汽車針對零散的行車服務，利用 AI 與數據中台整合洗車、停車與美容等需求，打造「洗金寶」等跨區共享平台。透過優化服務流程，減少車主繞路與停等產生的碳排，在提升便利性的同時，讓減碳自然融入日常行車體驗。",
+            thumbnail: ""
+          },
+          {
+            title: "寵物玩具之低碳永續AI大數據分析開發計畫｜萬達以AI打造寵物永續學",
+            url: "https://www.youtube.com/watch?v=LzzW_TBL558&list=RDLzzW_TBL558&start_radio=1",
+            description: "面對寵物玩具過度消費的環境負擔，萬達寵物啟動「寵物玩具低碳永續 AI 大數據分析開發計畫」，透過會員行為預測與智慧庫存管理，實現精準行銷。此舉將玩具從一次性消費轉為可循環的低碳模式，成功讓寵物產業邁向可量化的永續經營。",
+            thumbnail: ""
+          },
+          {
+            title: "低碳新美學：AI循環包裝與無紙化智慧推薦應用服務計畫｜客林美妝低碳新奢華",
+            url: "https://www.youtube.com/watch?v=BBXyoSygst0",
+            description: "美妝產業產值驚人，卻面臨包裝與紙本 DM 造成的環境負擔。客林國際推動低碳新美學，透過 AI 循環箱與 iSee 品味辨識系統取代傳統包材，將永續理念轉化為可量化的日常消費，成功為美妝通路實踐數位綠色轉型。",
             thumbnail: ""
           }
         ]
@@ -910,7 +1050,6 @@
           <img src="${plan.image}" alt="${plan.name}" loading="lazy">
         </div>
         <div class="plan-content">
-          <div class="plan-tag">${plan.shortName}</div>
           <h2>${plan.name}</h2>
           <p>${plan.description}</p>
         </div>
@@ -948,6 +1087,62 @@
       return "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1200&q=80";
     }
 
+    function getSubplansTemplate(plan){
+      if(!plan.subplans || !plan.subplans.length){
+        return "";
+      }
+
+      return plan.subplans.map((subplan, index) => {
+        const imageList = (subplan.images && subplan.images.length ? subplan.images : [plan.image]);
+
+        const images = imageList.map((image, imageIndex) => `
+          <img
+            class="gallery-image ${imageIndex === 0 ? 'is-active' : ''}"
+            src="${image}"
+            alt="${subplan.title} 圖片 ${imageIndex + 1}"
+            loading="lazy"
+          >
+        `).join("");
+
+        const dots = imageList.map((_, imageIndex) => `
+          <button
+            type="button"
+            class="gallery-dot ${imageIndex === 0 ? 'is-active' : ''}"
+            aria-label="切換到第 ${imageIndex + 1} 張圖片"
+            data-gallery-dot
+            data-subplan-index="${index}"
+            data-image-index="${imageIndex}">
+          </button>
+        `).join("");
+
+        return `
+          <article
+            class="subplan-card"
+            tabindex="0"
+            role="button"
+            data-subplan-scroll="${subplan.videoIndex}"
+            aria-label="查看 ${subplan.title} 對應影片">
+            <div class="subplan-title">${subplan.title}</div>
+            <div class="subplan-body">
+              <div class="subplan-gallery" data-gallery data-subplan-index="${index}" data-current-index="0">
+                <div class="gallery-frame">
+                  ${images}
+                  <button type="button" class="gallery-arrow prev" data-gallery-prev data-subplan-index="${index}" aria-label="上一張圖片">‹</button>
+                  <button type="button" class="gallery-arrow next" data-gallery-next data-subplan-index="${index}" aria-label="下一張圖片">›</button>
+                  <div class="gallery-dots">
+                    ${dots}
+                  </div>
+                </div>
+              </div>
+              <div class="subplan-text">
+                <p>${subplan.description}</p>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
     function renderOverview(){
       overviewGrid.innerHTML = PLANS.map(plan => `
         <article class="overview-card">
@@ -967,28 +1162,77 @@
       PLANS.forEach(plan => {
         const contentEl = document.getElementById(`plan${plan.id.toUpperCase()}Content`);
         const videosEl = document.getElementById(`plan${plan.id.toUpperCase()}Videos`);
+        const subplansEl = document.getElementById(`plan${plan.id.toUpperCase()}Subplans`);
 
-        contentEl.innerHTML = getPlanContentTemplate(plan);
+        if(contentEl){
+          contentEl.innerHTML = getPlanContentTemplate(plan);
+        }
 
-        videosEl.innerHTML = plan.videos.map((video, index) => `
-          <article class="video-card">
-            <div class="video-thumb">
-              <img src="${getVideoThumbnail(video)}" alt="${video.title}" loading="lazy">
-            </div>
-            <div class="video-body">
-              <h4>${video.title}</h4>
-              <p>${video.description}</p>
-              <button
-                class="btn btn-primary"
-                type="button"
-                data-plan="${plan.id}"
-                data-index="${index}">
-                播放
-              </button>
-            </div>
-          </article>
-        `).join("");
+        if(subplansEl){
+          subplansEl.innerHTML = getSubplansTemplate(plan);
+        }
+
+        if(videosEl){
+          videosEl.innerHTML = plan.videos.map((video, index) => `
+            <article class="video-card" id="video-${plan.id}-${index}">
+              <div class="video-thumb">
+                <img src="${getVideoThumbnail(video)}" alt="${video.title}" loading="lazy">
+              </div>
+              <div class="video-body">
+                <h4>${video.title}</h4>
+                <p>${video.description}</p>
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  data-plan="${plan.id}"
+                  data-index="${index}">
+                  播放
+                </button>
+              </div>
+            </article>
+          `).join("");
+        }
       });
+    }
+
+    function setGalleryImage(subplanIndex, imageIndex){
+      const gallery = document.querySelector(`[data-gallery][data-subplan-index="${subplanIndex}"]`);
+      if(!gallery) return;
+
+      const images = Array.from(gallery.querySelectorAll(".gallery-image"));
+      const dots = Array.from(gallery.querySelectorAll(".gallery-dot"));
+      if(!images.length) return;
+
+      const nextIndex = (imageIndex + images.length) % images.length;
+
+      images.forEach((image, idx) => {
+        image.classList.toggle("is-active", idx === nextIndex);
+      });
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle("is-active", idx === nextIndex);
+      });
+
+      gallery.dataset.currentIndex = String(nextIndex);
+    }
+
+    function moveGallery(subplanIndex, step){
+      const gallery = document.querySelector(`[data-gallery][data-subplan-index="${subplanIndex}"]`);
+      if(!gallery) return;
+      const currentIndex = Number(gallery.dataset.currentIndex || 0);
+      setGalleryImage(subplanIndex, currentIndex + step);
+    }
+
+    function highlightVideoCard(card){
+      document.querySelectorAll(".video-card.is-highlighted").forEach(item => {
+        item.classList.remove("is-highlighted");
+      });
+
+      if(card){
+        card.classList.add("is-highlighted");
+        window.setTimeout(() => {
+          card.classList.remove("is-highlighted");
+        }, 2400);
+      }
     }
 
     let activePlanId = null;
@@ -1017,7 +1261,7 @@
       activePlanId = planId;
       activeVideoIndex = index;
 
-      modalTitle.textContent = `${plan.shortName}｜${video.title}`;
+      modalTitle.textContent = `${plan.name}｜${video.title}`;
 
       modalIframe.classList.remove("active");
       modalVideo.classList.remove("active");
@@ -1058,9 +1302,62 @@
     }
 
     document.addEventListener("click", (event) => {
-      const target = event.target.closest("[data-plan][data-index]");
-      if(target){
-        openVideo(target.dataset.plan, Number(target.dataset.index));
+      const prevBtn = event.target.closest("[data-gallery-prev]");
+      if(prevBtn){
+        event.preventDefault();
+        event.stopPropagation();
+        moveGallery(Number(prevBtn.dataset.subplanIndex), -1);
+        return;
+      }
+
+      const nextBtn = event.target.closest("[data-gallery-next]");
+      if(nextBtn){
+        event.preventDefault();
+        event.stopPropagation();
+        moveGallery(Number(nextBtn.dataset.subplanIndex), 1);
+        return;
+      }
+
+      const dotBtn = event.target.closest("[data-gallery-dot]");
+      if(dotBtn){
+        event.preventDefault();
+        event.stopPropagation();
+        setGalleryImage(Number(dotBtn.dataset.subplanIndex), Number(dotBtn.dataset.imageIndex));
+        return;
+      }
+
+      const videoButton = event.target.closest("[data-plan][data-index]");
+      if(videoButton){
+        openVideo(videoButton.dataset.plan, Number(videoButton.dataset.index));
+        return;
+      }
+
+      const card = event.target.closest("[data-subplan-scroll]");
+      if(card){
+        const videoIndex = Number(card.dataset.subplanScroll);
+        const target = document.getElementById(`video-b-${videoIndex}`);
+        if(target){
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          highlightVideoCard(target);
+        }
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      const card = event.target.closest("[data-subplan-scroll]");
+      if(card && (event.key === "Enter" || event.key === " ")){
+        event.preventDefault();
+        const videoIndex = Number(card.dataset.subplanScroll);
+        const target = document.getElementById(`video-b-${videoIndex}`);
+        if(target){
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          highlightVideoCard(target);
+        }
+        return;
+      }
+
+      if(event.key === "Escape" && modal.classList.contains("is-open")){
+        closeModal();
       }
     });
 
@@ -1068,12 +1365,6 @@
 
     modal.addEventListener("click", (event) => {
       if(event.target === modal) closeModal();
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if(event.key === "Escape" && modal.classList.contains("is-open")){
-        closeModal();
-      }
     });
 
     modalPrev.addEventListener("click", () => {
