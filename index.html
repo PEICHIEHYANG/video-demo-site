@@ -732,26 +732,26 @@
       gap:8px;
     }
 
-    /* PDF.js modal - CSS optimized only */
     .pdf-modal{
-      padding:6px;
+      padding:4px;
     }
     .pdf-modal .modal-dialog{
-      width:min(1400px, 100%);
-      height:96vh;
+      width:min(1440px, 100%);
+      height:98vh;
       display:flex;
       flex-direction:column;
       background:#0b1514;
-      border-radius:16px;
+      border-radius:14px;
     }
-    .pdf-modal .modal-head,
-    .pdf-modal .modal-foot{
+    .pdf-modal .modal-head{
       flex:0 0 auto;
-      padding:10px 14px;
+      padding:8px 12px;
+      min-height:52px;
+      border-bottom:1px solid rgba(255,255,255,.08);
     }
     .pdf-modal .modal-head strong{
       font-size:1rem;
-      line-height:1.35;
+      line-height:1.3;
     }
     .pdf-modal .modal-close{
       padding:8px 12px;
@@ -768,9 +768,9 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
-      padding:8px 12px;
-      min-height:52px;
+      gap:10px;
+      padding:6px 10px;
+      min-height:48px;
       background:#102422;
       color:#d6f2ec;
       border-bottom:1px solid rgba(255,255,255,.08);
@@ -791,7 +791,6 @@
       padding:6px 10px;
       font-size:.95rem;
       font-weight:700;
-      min-width:unset;
     }
     .pdf-toolbar button:disabled{
       opacity:.45;
@@ -800,18 +799,18 @@
     }
     .pdf-page-indicator,
     .pdf-zoom-indicator{
-      min-width:72px;
+      min-width:68px;
       text-align:center;
       font-weight:700;
       color:#d6f2ec;
-      font-size:1rem;
+      font-size:.98rem;
     }
     .pdf-viewer-wrap{
       position:relative;
       flex:1 1 auto;
       min-height:0;
       overflow:auto;
-      padding:6px;
+      padding:2px;
       background:linear-gradient(180deg,#eef5f3 0%, #e3ece9 100%);
     }
     .pdf-canvas-holder{
@@ -827,8 +826,8 @@
       max-width:100%;
       height:auto;
       background:#fff;
-      box-shadow:0 6px 16px rgba(0,0,0,.12);
-      border-radius:4px;
+      box-shadow:0 4px 12px rgba(0,0,0,.10);
+      border-radius:2px;
     }
     .pdf-loading,
     .pdf-error{
@@ -855,23 +854,6 @@
     .pdf-loading.is-hidden,
     .pdf-error.is-hidden{
       display:none;
-    }
-    .pdf-actions{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .pdf-actions .btn-link{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);
-      background:rgba(255,255,255,.06);
-      color:#fff;
-      font-weight:700;
     }
 
     .back-top{
@@ -1042,49 +1024,42 @@
       }
 
       .pdf-modal{
-        padding:4px;
+        padding:2px;
       }
       .pdf-modal .modal-dialog{
         width:100%;
-        height:98vh;
-        border-radius:12px;
+        height:99vh;
+        border-radius:10px;
       }
-      .pdf-modal .modal-head,
-      .pdf-modal .modal-foot{
-        padding:8px 10px;
+      .pdf-modal .modal-head{
+        padding:6px 8px;
+        min-height:46px;
       }
       .pdf-modal .modal-head strong{
-        font-size:.95rem;
+        font-size:.94rem;
       }
       .pdf-modal .modal-close{
-        padding:7px 10px;
+        padding:6px 10px;
       }
       .pdf-toolbar{
-        padding:6px 8px;
-        min-height:48px;
+        padding:5px 8px;
+        min-height:44px;
       }
       .pdf-toolbar-left,
       .pdf-toolbar-right{
         width:100%;
       }
       .pdf-toolbar button{
-        padding:5px 9px;
+        padding:5px 8px;
         font-size:.9rem;
       }
       .pdf-page-indicator,
       .pdf-zoom-indicator{
-        min-width:64px;
-        font-size:.95rem;
+        min-width:60px;
+        font-size:.92rem;
       }
       .pdf-viewer-wrap{
-        padding:4px;
-      }
-      .pdf-actions{
-        width:100%;
-        justify-content:flex-end;
-      }
-      .pdf-actions .btn-link{
-        padding:7px 10px;
+        padding:1px;
       }
     }
   </style>
@@ -1237,7 +1212,7 @@
           </div>
           <div class="pdf-toolbar-right">
             <button type="button" id="pdfZoomOut">－</button>
-            <div class="pdf-zoom-indicator" id="pdfZoomIndicator">100%</div>
+            <div class="pdf-zoom-indicator" id="pdfZoomIndicator">60%</div>
             <button type="button" id="pdfZoomIn">＋</button>
           </div>
         </div>
@@ -1248,13 +1223,6 @@
           <div class="pdf-canvas-holder">
             <canvas id="pdfCanvas"></canvas>
           </div>
-        </div>
-      </div>
-
-      <div class="modal-foot">
-        <div>提示：此視窗採 PDF.js 原頁顯示，不另開分頁。</div>
-        <div class="pdf-actions">
-          <a class="btn-link" id="pdfDownloadLink" href="#" target="_blank" rel="noopener noreferrer">下載 / 備援開啟</a>
         </div>
       </div>
     </div>
@@ -1780,7 +1748,6 @@
     const pdfModalClose = document.getElementById("pdfModalClose");
     const pdfLoading = document.getElementById("pdfLoading");
     const pdfError = document.getElementById("pdfError");
-    const pdfDownloadLink = document.getElementById("pdfDownloadLink");
     const pdfCanvas = document.getElementById("pdfCanvas");
     const pdfViewerWrap = document.getElementById("pdfViewerWrap");
     const pdfPrevPage = document.getElementById("pdfPrevPage");
@@ -1793,7 +1760,7 @@
     let pdfDoc = null;
     let currentPageNumber = 1;
     let renderTask = null;
-    let zoomLevel = 1;
+    let zoomLevel = 0.6;
     let currentPdfUrl = "";
 
     function resetPdfState() {
@@ -1803,10 +1770,10 @@
       }
       pdfDoc = null;
       currentPageNumber = 1;
-      zoomLevel = 1;
+      zoomLevel = 0.6;
       currentPdfUrl = "";
       pdfPageIndicator.textContent = "1 / 1";
-      pdfZoomIndicator.textContent = "100%";
+      pdfZoomIndicator.textContent = "60%";
       pdfPrevPage.disabled = true;
       pdfNextPage.disabled = true;
       pdfZoomIn.disabled = true;
@@ -1830,7 +1797,7 @@
       pdfPrevPage.disabled = !pdfDoc || currentPageNumber <= 1;
       pdfNextPage.disabled = !pdfDoc || currentPageNumber >= totalPages;
       pdfZoomIn.disabled = !pdfDoc || zoomLevel >= 2.4;
-      pdfZoomOut.disabled = !pdfDoc || zoomLevel <= 0.6;
+      pdfZoomOut.disabled = !pdfDoc || zoomLevel <= 0.4;
     }
 
     async function renderPage(pageNumber) {
@@ -1845,7 +1812,7 @@
       pdfError.classList.add("is-hidden");
 
       const page = await pdfDoc.getPage(pageNumber);
-      const containerWidth = Math.max(pdfViewerWrap.clientWidth - 32, 320);
+      const containerWidth = Math.max(pdfViewerWrap.clientWidth - 8, 320);
       const unscaledViewport = page.getViewport({ scale: 1 });
 
       const fitScale = containerWidth / unscaledViewport.width;
@@ -1886,7 +1853,6 @@
       resetPdfState();
       currentPdfUrl = url;
       pdfModalTitle.textContent = title || "PDF 手冊預覽";
-      pdfDownloadLink.href = url;
 
       pdfModal.classList.add("is-open");
       pdfModal.setAttribute("aria-hidden", "false");
@@ -1904,7 +1870,7 @@
       } catch (error) {
         pdfLoading.classList.add("is-hidden");
         pdfError.classList.remove("is-hidden");
-        pdfError.textContent = "PDF 無法載入。\n請確認檔案路徑正確，或使用右下角「下載 / 備援開啟」。";
+        pdfError.textContent = "PDF 無法載入。\n請確認檔案路徑正確。";
         console.error(error);
       }
     }
@@ -1935,8 +1901,8 @@
     }
 
     async function zoomOutPdf() {
-      if (!pdfDoc || zoomLevel <= 0.6) return;
-      zoomLevel = Math.max(0.6, zoomLevel - 0.2);
+      if (!pdfDoc || zoomLevel <= 0.4) return;
+      zoomLevel = Math.max(0.4, zoomLevel - 0.2);
       await renderPage(currentPageNumber);
     }
 
