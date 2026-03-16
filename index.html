@@ -732,6 +732,7 @@
       gap:8px;
     }
 
+    /* PDF.js modal */
     .pdf-modal .modal-dialog{
       width:min(1280px, 100%);
       height:min(92vh, 100%);
@@ -746,15 +747,71 @@
     .pdf-modal-body{
       flex:1 1 auto;
       min-height:0;
-      background:#e9efed;
-      position:relative;
+      background:#eff4f2;
+      display:flex;
+      flex-direction:column;
     }
-    .pdf-modal-body iframe{
+    .pdf-toolbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      background:#102422;
+      color:#d6f2ec;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      flex-wrap:wrap;
+    }
+    .pdf-toolbar-left,
+    .pdf-toolbar-right{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .pdf-toolbar button{
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      border-radius:999px;
+      padding:8px 12px;
+      font-weight:700;
+    }
+    .pdf-toolbar button:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+      transform:none;
+    }
+    .pdf-page-indicator,
+    .pdf-zoom-indicator{
+      min-width:88px;
+      text-align:center;
+      font-weight:700;
+      color:#d6f2ec;
+    }
+    .pdf-viewer-wrap{
+      position:relative;
+      flex:1 1 auto;
+      min-height:0;
+      overflow:auto;
+      padding:16px;
+      background:linear-gradient(180deg,#eef5f3 0%, #e3ece9 100%);
+    }
+    .pdf-canvas-holder{
       width:100%;
-      height:100%;
-      border:0;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      min-height:100%;
+    }
+    #pdfCanvas{
       display:block;
+      width:100%;
+      max-width:100%;
+      height:auto;
       background:#fff;
+      box-shadow:0 10px 30px rgba(0,0,0,.14);
+      border-radius:6px;
     }
     .pdf-loading,
     .pdf-error{
@@ -767,6 +824,7 @@
       text-align:center;
       font-weight:700;
       letter-spacing:.02em;
+      white-space:pre-line;
     }
     .pdf-loading{
       color:#22443e;
@@ -776,7 +834,6 @@
       color:#7a1f1f;
       background:linear-gradient(180deg,#fff5f5 0%, #fde8e8 100%);
       display:none;
-      white-space:pre-line;
     }
     .pdf-loading.is-hidden,
     .pdf-error.is-hidden{
@@ -978,6 +1035,16 @@
       .pdf-modal .modal-foot{
         padding:12px 14px;
       }
+      .pdf-toolbar{
+        padding:10px 12px;
+      }
+      .pdf-toolbar-left,
+      .pdf-toolbar-right{
+        width:100%;
+      }
+      .pdf-viewer-wrap{
+        padding:10px;
+      }
       .pdf-actions{
         width:100%;
         justify-content:flex-end;
@@ -1065,7 +1132,6 @@
         <div class="video-area" id="planBVideoArea">
           <div class="video-area-head">
             <h3>商業服務業數據驅動價值創造計畫｜影片素材</h3>
-	      <p>透過簡易易懂影片，協助商業服務業瞭解如何從產品/服務設計、能源設備耗用等面向，系統性檢視可落實的節能減碳方案，從日常營運便邁向低碳轉型。</p>
           </div>
           <div class="video-grid" id="planBVideos"></div>
         </div>
@@ -1117,7 +1183,7 @@
     </div>
   </div>
 
-  <!-- PDF Modal -->
+  <!-- PDF.js Modal -->
   <div class="modal pdf-modal" id="pdfModal" aria-hidden="true">
     <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="pdfModalTitle">
       <div class="modal-head">
@@ -1126,17 +1192,30 @@
       </div>
 
       <div class="pdf-modal-body">
-        <div class="pdf-loading" id="pdfLoading">PDF 載入中，請稍候…</div>
-        <div class="pdf-error is-hidden" id="pdfError"></div>
-        <iframe
-          id="pdfFrame"
-          title="PDF 手冊預覽"
-          referrerpolicy="strict-origin-when-cross-origin">
-        </iframe>
+        <div class="pdf-toolbar">
+          <div class="pdf-toolbar-left">
+            <button type="button" id="pdfPrevPage">上一頁</button>
+            <div class="pdf-page-indicator" id="pdfPageIndicator">1 / 1</div>
+            <button type="button" id="pdfNextPage">下一頁</button>
+          </div>
+          <div class="pdf-toolbar-right">
+            <button type="button" id="pdfZoomOut">－</button>
+            <div class="pdf-zoom-indicator" id="pdfZoomIndicator">100%</div>
+            <button type="button" id="pdfZoomIn">＋</button>
+          </div>
+        </div>
+
+        <div class="pdf-viewer-wrap" id="pdfViewerWrap">
+          <div class="pdf-loading" id="pdfLoading">PDF 載入中，請稍候…</div>
+          <div class="pdf-error is-hidden" id="pdfError"></div>
+          <div class="pdf-canvas-holder">
+            <canvas id="pdfCanvas"></canvas>
+          </div>
+        </div>
       </div>
 
       <div class="modal-foot">
-        <div>提示：此視窗採原頁內嵌顯示，不另開分頁。</div>
+        <div>提示：此視窗採 PDF.js 原頁顯示，不另開分頁。</div>
         <div class="pdf-actions">
           <a class="btn-link" id="pdfDownloadLink" href="#" target="_blank" rel="noopener noreferrer">下載 / 備援開啟</a>
         </div>
@@ -1153,12 +1232,12 @@
         anchor: "plan-a",
         name: "商業服務業減碳指引",
         description: "因應我國2050淨零排放目標，服務業已正式納入溫室氣體盤查與減碳轉型的重要行列，經濟部商業發展署編制「商業服務業節能減碳指引」、簡易易懂低碳經營模式指引影片，協助商業服務業邁向低碳轉型。",
-        image: "assets/商業服務業減碳指引.jpg",
+        image: "assets/商業服務業減碳指引.png",
         manuals: [
           {
             title: "商業服務業減碳指引｜手冊素材",
-            cover: "assets/商業服務業減碳指引手冊素材.jpg",
-            link: "https://serv.gcis.nat.gov.tw/biznetzero/ReadFile/?p=Article&n=0226_%e7%b6%a0%e5%9f%ba%e6%9c%83_%e6%8e%92%e7%89%88.pdf",
+            cover: "assets/說明商業服務業減碳指引手冊封面.png",
+            link: "./assets/0226_綠基會_排版.pdf",
             description: "因應我國2050淨零排放目標，服務業已正式納入溫室氣體盤查與減碳轉型的重要行列。經濟部商業發展署編製「商業服務業節能減碳指引」，彙整相關政策規範，並系統性說明服務業在「盤查、減量、抵換與碳中和」各階段應掌握之重點，協助企業建立完整減碳管理架構，逐步落實低碳轉型與永續經營。"
           }
         ],
@@ -1478,16 +1557,6 @@
     const modalIframe = document.getElementById("modalIframe");
     const modalVideo = document.getElementById("modalVideo");
 
-    const pdfModal = document.getElementById("pdfModal");
-    const pdfModalTitle = document.getElementById("pdfModalTitle");
-    const pdfModalClose = document.getElementById("pdfModalClose");
-    const pdfFrame = document.getElementById("pdfFrame");
-    const pdfLoading = document.getElementById("pdfLoading");
-    const pdfError = document.getElementById("pdfError");
-    const pdfDownloadLink = document.getElementById("pdfDownloadLink");
-
-    let currentPdfBlobUrl = null;
-
     function updateModalButtons(){
       const plan = PLANS.find(item => item.id === activePlanId);
       if(!plan) return;
@@ -1543,79 +1612,6 @@
       document.body.style.overflow = "";
     }
 
-    function resetPdfViewerState(){
-      pdfLoading.classList.remove("is-hidden");
-      pdfError.classList.add("is-hidden");
-      pdfError.textContent = "";
-      pdfFrame.src = "";
-
-      if(currentPdfBlobUrl){
-        URL.revokeObjectURL(currentPdfBlobUrl);
-        currentPdfBlobUrl = null;
-      }
-    }
-
-    async function loadPdfIntoFrame(url){
-      const response = await fetch(url, {
-        method: "GET",
-        credentials: "same-origin"
-      });
-
-      if(!response.ok){
-        throw new Error(`PDF 讀取失敗（HTTP ${response.status}）`);
-      }
-
-      const blob = await response.blob();
-
-      if(blob.size === 0){
-        throw new Error("PDF 讀取失敗：檔案內容為空。");
-      }
-
-      currentPdfBlobUrl = URL.createObjectURL(blob);
-      pdfFrame.src = currentPdfBlobUrl;
-    }
-
-    async function openPdfModal(url, title){
-      pdfModalTitle.textContent = title || "PDF 手冊預覽";
-      pdfDownloadLink.href = url;
-
-      resetPdfViewerState();
-
-      pdfModal.classList.add("is-open");
-      pdfModal.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-
-      try{
-        await loadPdfIntoFrame(url);
-      }catch(error){
-        pdfLoading.classList.add("is-hidden");
-        pdfError.classList.remove("is-hidden");
-        pdfError.textContent =
-          "PDF 無法在此視窗中顯示。\n\n可能原因：\n1. 伺服器限制讀取\n2. 跨來源限制（CORS）\n3. 檔案路徑或權限設定異常\n\n請先使用右下角「下載 / 備援開啟」確認檔案是否可取得。";
-        console.error(error);
-      }
-    }
-
-    function closePdfModal(){
-      pdfModal.classList.remove("is-open");
-      pdfModal.setAttribute("aria-hidden", "true");
-      resetPdfViewerState();
-      document.body.style.overflow = "";
-    }
-
-    pdfFrame.addEventListener("load", () => {
-      pdfLoading.classList.add("is-hidden");
-      pdfError.classList.add("is-hidden");
-    });
-
-    pdfModalClose.addEventListener("click", closePdfModal);
-
-    pdfModal.addEventListener("click", (event) => {
-      if(event.target === pdfModal){
-        closePdfModal();
-      }
-    });
-
     document.addEventListener("click", (event) => {
       const prevBtn = event.target.closest("[data-gallery-prev]");
       if(prevBtn){
@@ -1638,16 +1634,6 @@
         event.preventDefault();
         event.stopPropagation();
         setGalleryImage(Number(dotBtn.dataset.subplanIndex), Number(dotBtn.dataset.imageIndex));
-        return;
-      }
-
-      const manualButton = event.target.closest("[data-manual-pdf]");
-      if(manualButton){
-        event.preventDefault();
-        openPdfModal(
-          manualButton.dataset.manualPdf,
-          manualButton.dataset.manualTitle
-        );
         return;
       }
 
@@ -1682,7 +1668,7 @@
       }
 
       if(event.key === "Escape"){
-        if(pdfModal.classList.contains("is-open")){
+        if(window.pdfModal && pdfModal.classList.contains("is-open")){
           closePdfModal();
           return;
         }
@@ -1744,6 +1730,210 @@
 
     renderOverview();
     renderPlanSections();
+  </script>
+
+  <script type="module">
+    import * as pdfjsLib from "https://cdn.jsdelivr.net/npm/pdfjs-dist@5.5.207/build/pdf.min.mjs";
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://cdn.jsdelivr.net/npm/pdfjs-dist@5.5.207/build/pdf.worker.min.mjs";
+
+    const pdfModal = document.getElementById("pdfModal");
+    const pdfModalTitle = document.getElementById("pdfModalTitle");
+    const pdfModalClose = document.getElementById("pdfModalClose");
+    const pdfLoading = document.getElementById("pdfLoading");
+    const pdfError = document.getElementById("pdfError");
+    const pdfDownloadLink = document.getElementById("pdfDownloadLink");
+    const pdfCanvas = document.getElementById("pdfCanvas");
+    const pdfViewerWrap = document.getElementById("pdfViewerWrap");
+    const pdfPrevPage = document.getElementById("pdfPrevPage");
+    const pdfNextPage = document.getElementById("pdfNextPage");
+    const pdfPageIndicator = document.getElementById("pdfPageIndicator");
+    const pdfZoomIn = document.getElementById("pdfZoomIn");
+    const pdfZoomOut = document.getElementById("pdfZoomOut");
+    const pdfZoomIndicator = document.getElementById("pdfZoomIndicator");
+
+    let pdfDoc = null;
+    let currentPageNumber = 1;
+    let renderTask = null;
+    let zoomLevel = 1;
+    let currentPdfUrl = "";
+
+    function resetPdfState() {
+      if (renderTask) {
+        try { renderTask.cancel(); } catch (error) {}
+        renderTask = null;
+      }
+      pdfDoc = null;
+      currentPageNumber = 1;
+      zoomLevel = 1;
+      currentPdfUrl = "";
+      pdfPageIndicator.textContent = "1 / 1";
+      pdfZoomIndicator.textContent = "100%";
+      pdfPrevPage.disabled = true;
+      pdfNextPage.disabled = true;
+      pdfZoomIn.disabled = true;
+      pdfZoomOut.disabled = true;
+      pdfLoading.classList.remove("is-hidden");
+      pdfError.classList.add("is-hidden");
+      pdfError.textContent = "";
+      const ctx = pdfCanvas.getContext("2d");
+      ctx.clearRect(0, 0, pdfCanvas.width || 1, pdfCanvas.height || 1);
+      pdfCanvas.width = 1;
+      pdfCanvas.height = 1;
+      pdfCanvas.style.width = "100%";
+      pdfCanvas.style.height = "auto";
+      pdfViewerWrap.scrollTop = 0;
+    }
+
+    function updatePdfControls() {
+      const totalPages = pdfDoc ? pdfDoc.numPages : 1;
+      pdfPageIndicator.textContent = `${currentPageNumber} / ${totalPages}`;
+      pdfZoomIndicator.textContent = `${Math.round(zoomLevel * 100)}%`;
+      pdfPrevPage.disabled = !pdfDoc || currentPageNumber <= 1;
+      pdfNextPage.disabled = !pdfDoc || currentPageNumber >= totalPages;
+      pdfZoomIn.disabled = !pdfDoc || zoomLevel >= 2.4;
+      pdfZoomOut.disabled = !pdfDoc || zoomLevel <= 0.6;
+    }
+
+    async function renderPage(pageNumber) {
+      if (!pdfDoc) return;
+
+      if (renderTask) {
+        try { renderTask.cancel(); } catch (error) {}
+        renderTask = null;
+      }
+
+      pdfLoading.classList.remove("is-hidden");
+      pdfError.classList.add("is-hidden");
+
+      const page = await pdfDoc.getPage(pageNumber);
+      const containerWidth = Math.max(pdfViewerWrap.clientWidth - 32, 320);
+      const unscaledViewport = page.getViewport({ scale: 1 });
+
+      const fitScale = containerWidth / unscaledViewport.width;
+      const finalScale = fitScale * zoomLevel;
+      const viewport = page.getViewport({ scale: finalScale });
+
+      const outputScale = window.devicePixelRatio || 1;
+      const context = pdfCanvas.getContext("2d");
+
+      pdfCanvas.width = Math.floor(viewport.width * outputScale);
+      pdfCanvas.height = Math.floor(viewport.height * outputScale);
+      pdfCanvas.style.width = `${viewport.width}px`;
+      pdfCanvas.style.height = `${viewport.height}px`;
+
+      context.setTransform(outputScale, 0, 0, outputScale, 0, 0);
+      context.imageSmoothingEnabled = true;
+
+      renderTask = page.render({
+        canvasContext: context,
+        viewport
+      });
+
+      try {
+        await renderTask.promise;
+      } catch (error) {
+        if (error?.name !== "RenderingCancelledException") {
+          throw error;
+        }
+      } finally {
+        renderTask = null;
+        pdfLoading.classList.add("is-hidden");
+      }
+
+      updatePdfControls();
+    }
+
+    async function openPdfModal(url, title) {
+      resetPdfState();
+      currentPdfUrl = url;
+      pdfModalTitle.textContent = title || "PDF 手冊預覽";
+      pdfDownloadLink.href = url;
+
+      pdfModal.classList.add("is-open");
+      pdfModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+
+      try {
+        const loadingTask = pdfjsLib.getDocument({
+          url,
+          cMapPacked: true
+        });
+        pdfDoc = await loadingTask.promise;
+        currentPageNumber = 1;
+        updatePdfControls();
+        await renderPage(currentPageNumber);
+      } catch (error) {
+        pdfLoading.classList.add("is-hidden");
+        pdfError.classList.remove("is-hidden");
+        pdfError.textContent = "PDF 無法載入。\n請確認檔案路徑正確，或使用右下角「下載 / 備援開啟」。";
+        console.error(error);
+      }
+    }
+
+    function closePdfModal() {
+      pdfModal.classList.remove("is-open");
+      pdfModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      resetPdfState();
+    }
+
+    async function goToPrevPage() {
+      if (!pdfDoc || currentPageNumber <= 1) return;
+      currentPageNumber -= 1;
+      await renderPage(currentPageNumber);
+    }
+
+    async function goToNextPage() {
+      if (!pdfDoc || currentPageNumber >= pdfDoc.numPages) return;
+      currentPageNumber += 1;
+      await renderPage(currentPageNumber);
+    }
+
+    async function zoomInPdf() {
+      if (!pdfDoc || zoomLevel >= 2.4) return;
+      zoomLevel = Math.min(2.4, zoomLevel + 0.2);
+      await renderPage(currentPageNumber);
+    }
+
+    async function zoomOutPdf() {
+      if (!pdfDoc || zoomLevel <= 0.6) return;
+      zoomLevel = Math.max(0.6, zoomLevel - 0.2);
+      await renderPage(currentPageNumber);
+    }
+
+    pdfModalClose.addEventListener("click", closePdfModal);
+    pdfModal.addEventListener("click", (event) => {
+      if (event.target === pdfModal) {
+        closePdfModal();
+      }
+    });
+
+    pdfPrevPage.addEventListener("click", goToPrevPage);
+    pdfNextPage.addEventListener("click", goToNextPage);
+    pdfZoomIn.addEventListener("click", zoomInPdf);
+    pdfZoomOut.addEventListener("click", zoomOutPdf);
+
+    window.addEventListener("resize", () => {
+      if (pdfModal.classList.contains("is-open") && pdfDoc) {
+        renderPage(currentPageNumber).catch(console.error);
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      const manualButton = event.target.closest("[data-manual-pdf]");
+      if (manualButton) {
+        event.preventDefault();
+        openPdfModal(
+          manualButton.dataset.manualPdf,
+          manualButton.dataset.manualTitle
+        );
+      }
+    });
+
+    window.pdfModal = pdfModal;
+    window.closePdfModal = closePdfModal;
   </script>
 </body>
 </html>
