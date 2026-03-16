@@ -314,6 +314,71 @@
       font-size:1rem;
     }
 
+    .manuals-wrap{
+      margin-top:28px;
+    }
+    .manuals-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:14px;
+      flex-wrap:wrap;
+    }
+    .manuals-head h3{
+      margin:0;
+      font-size:1.25rem;
+    }
+    .manuals-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:18px;
+    }
+    .manual-card{
+      display:grid;
+      grid-template-columns:minmax(180px, 240px) minmax(0,1fr);
+      gap:20px;
+      align-items:center;
+      background:#fbfefd;
+      border:1px solid #dfeee9;
+      border-radius:22px;
+      box-shadow:var(--shadow-sm);
+      padding:22px;
+      transition:.2s ease;
+    }
+    .manual-card:hover{
+      transform:translateY(-2px);
+      box-shadow:var(--shadow);
+      border-color:#cfe6df;
+    }
+    .manual-cover{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:18px;
+      background:linear-gradient(135deg,#e5f5ef,#e7f2fb);
+      border:1px solid #deeeea;
+      min-height:220px;
+      padding:18px;
+    }
+    .manual-cover img{
+      max-width:100%;
+      max-height:200px;
+      object-fit:contain;
+    }
+    .manual-content h4{
+      margin:0 0 10px;
+      font-size:1.12rem;
+      line-height:1.6;
+      color:var(--text);
+    }
+    .manual-content p{
+      margin:0 0 16px;
+      color:var(--muted);
+      font-size:.98rem;
+      line-height:1.9;
+    }
+
     .subplans-wrap{
       margin-top:24px;
     }
@@ -423,12 +488,8 @@
       justify-content:center;
       z-index:3;
     }
-    .gallery-arrow.prev{
-      left:12px;
-    }
-    .gallery-arrow.next{
-      right:12px;
-    }
+    .gallery-arrow.prev{ left:12px; }
+    .gallery-arrow.next{ right:12px; }
     .gallery-dots{
       position:absolute;
       left:50%;
@@ -671,6 +732,74 @@
       gap:8px;
     }
 
+    .pdf-modal .modal-dialog{
+      width:min(1280px, 100%);
+      height:min(92vh, 100%);
+      display:flex;
+      flex-direction:column;
+      background:#0b1514;
+    }
+    .pdf-modal .modal-head,
+    .pdf-modal .modal-foot{
+      flex:0 0 auto;
+    }
+    .pdf-modal-body{
+      flex:1 1 auto;
+      min-height:0;
+      background:#e9efed;
+      position:relative;
+    }
+    .pdf-modal-body iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
+      background:#fff;
+    }
+    .pdf-loading,
+    .pdf-error{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      text-align:center;
+      font-weight:700;
+      letter-spacing:.02em;
+    }
+    .pdf-loading{
+      color:#22443e;
+      background:linear-gradient(180deg,#eef5f3 0%, #e3ece9 100%);
+    }
+    .pdf-error{
+      color:#7a1f1f;
+      background:linear-gradient(180deg,#fff5f5 0%, #fde8e8 100%);
+      display:none;
+      white-space:pre-line;
+    }
+    .pdf-loading.is-hidden,
+    .pdf-error.is-hidden{
+      display:none;
+    }
+    .pdf-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .pdf-actions .btn-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      font-weight:700;
+    }
+
     .back-top{
       position:fixed;
       right:20px;
@@ -705,6 +834,7 @@
       .video-grid{
         grid-template-columns:repeat(2,1fr);
       }
+      .manual-card,
       .subplan-body{
         grid-template-columns:1fr;
       }
@@ -780,6 +910,18 @@
       .plan-box{
         padding:22px;
       }
+      .manual-card{
+        padding:18px;
+      }
+      .manual-cover{
+        min-height:180px;
+      }
+      .manual-content h4{
+        font-size:1rem;
+      }
+      .manual-content p{
+        font-size:.94rem;
+      }
       .subplan-title{
         padding:16px 18px 12px;
         font-size:1.05rem;
@@ -823,6 +965,22 @@
       }
       .footer-meta{
         line-height:1.55;
+      }
+
+      .pdf-modal{
+        padding:8px;
+      }
+      .pdf-modal .modal-dialog{
+        height:min(96vh, 100%);
+        border-radius:18px;
+      }
+      .pdf-modal .modal-head,
+      .pdf-modal .modal-foot{
+        padding:12px 14px;
+      }
+      .pdf-actions{
+        width:100%;
+        justify-content:flex-end;
       }
     }
   </style>
@@ -876,6 +1034,14 @@
     <section class="plan-section container" id="plan-a">
       <div class="plan-box">
         <div class="plan-top" id="planAContent"></div>
+
+        <div class="manuals-wrap">
+          <div class="manuals-head">
+            <h3>商業服務業減碳指引｜手冊素材</h3>
+          </div>
+          <div class="manuals-grid" id="planAManuals"></div>
+        </div>
+
         <div class="video-area">
           <div class="video-area-head">
             <h3>商業服務業減碳指引｜影片素材</h3>
@@ -888,11 +1054,10 @@
     <section class="plan-section container" id="plan-b">
       <div class="plan-box">
         <div class="plan-top" id="planBContent"></div>
-	
+
         <div class="subplans-wrap">
           <div class="subplans-head">
             <h3>計畫簡介</h3>
-
           </div>
           <div class="subplans" id="planBSubplans"></div>
         </div>
@@ -900,6 +1065,7 @@
         <div class="video-area" id="planBVideoArea">
           <div class="video-area-head">
             <h3>商業服務業數據驅動價值創造計畫｜影片素材</h3>
+	      <p>透過簡易易懂影片，協助商業服務業瞭解如何從產品/服務設計、能源設備耗用等面向，系統性檢視可落實的節能減碳方案，從日常營運便邁向低碳轉型。</p>
           </div>
           <div class="video-grid" id="planBVideos"></div>
         </div>
@@ -928,6 +1094,7 @@
     </div>
   </footer>
 
+  <!-- 影片 Modal -->
   <div class="modal" id="videoModal" aria-hidden="true">
     <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal-head">
@@ -950,6 +1117,33 @@
     </div>
   </div>
 
+  <!-- PDF Modal -->
+  <div class="modal pdf-modal" id="pdfModal" aria-hidden="true">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="pdfModalTitle">
+      <div class="modal-head">
+        <strong id="pdfModalTitle">PDF 手冊預覽</strong>
+        <button type="button" class="modal-close" id="pdfModalClose" aria-label="關閉 PDF 預覽">關閉</button>
+      </div>
+
+      <div class="pdf-modal-body">
+        <div class="pdf-loading" id="pdfLoading">PDF 載入中，請稍候…</div>
+        <div class="pdf-error is-hidden" id="pdfError"></div>
+        <iframe
+          id="pdfFrame"
+          title="PDF 手冊預覽"
+          referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
+      </div>
+
+      <div class="modal-foot">
+        <div>提示：此視窗採原頁內嵌顯示，不另開分頁。</div>
+        <div class="pdf-actions">
+          <a class="btn-link" id="pdfDownloadLink" href="#" target="_blank" rel="noopener noreferrer">下載 / 備援開啟</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <button class="back-top" id="backTop" type="button" aria-label="回到頂端">↑</button>
 
   <script>
@@ -959,7 +1153,15 @@
         anchor: "plan-a",
         name: "商業服務業減碳指引",
         description: "因應我國2050淨零排放目標，服務業已正式納入溫室氣體盤查與減碳轉型的重要行列，經濟部商業發展署編制「商業服務業節能減碳指引」、簡易易懂低碳經營模式指引影片，協助商業服務業邁向低碳轉型。",
-        image: "assets/商業服務業減碳指引.png",
+        image: "assets/商業服務業減碳指引.jpg",
+        manuals: [
+          {
+            title: "商業服務業減碳指引｜手冊素材",
+            cover: "assets/商業服務業減碳指引手冊素材.jpg",
+            link: "https://serv.gcis.nat.gov.tw/biznetzero/ReadFile/?p=Article&n=0226_%e7%b6%a0%e5%9f%ba%e6%9c%83_%e6%8e%92%e7%89%88.pdf",
+            description: "因應我國2050淨零排放目標，服務業已正式納入溫室氣體盤查與減碳轉型的重要行列。經濟部商業發展署編製「商業服務業節能減碳指引」，彙整相關政策規範，並系統性說明服務業在「盤查、減量、抵換與碳中和」各階段應掌握之重點，協助企業建立完整減碳管理架構，逐步落實低碳轉型與永續經營。"
+          }
+        ],
         videos: [
           {
             title: "商業服務業減碳指引｜餐飲業低碳指引",
@@ -1054,6 +1256,31 @@
           <p>${plan.description}</p>
         </div>
       `;
+    }
+
+    function getManualsTemplate(plan){
+      if(!plan.manuals || !plan.manuals.length){
+        return "";
+      }
+
+      return plan.manuals.map(manual => `
+        <article class="manual-card">
+          <div class="manual-cover">
+            <img src="${manual.cover}" alt="${manual.title}" loading="lazy">
+          </div>
+          <div class="manual-content">
+            <h4>${manual.title}</h4>
+            <p>${manual.description}</p>
+            <button
+              class="btn btn-primary"
+              type="button"
+              data-manual-pdf="${manual.link}"
+              data-manual-title="${manual.title}">
+              查看 PDF 手冊
+            </button>
+          </div>
+        </article>
+      `).join("");
     }
 
     function getYoutubeId(url){
@@ -1161,11 +1388,16 @@
     function renderPlanSections(){
       PLANS.forEach(plan => {
         const contentEl = document.getElementById(`plan${plan.id.toUpperCase()}Content`);
+        const manualsEl = document.getElementById(`plan${plan.id.toUpperCase()}Manuals`);
         const videosEl = document.getElementById(`plan${plan.id.toUpperCase()}Videos`);
         const subplansEl = document.getElementById(`plan${plan.id.toUpperCase()}Subplans`);
 
         if(contentEl){
           contentEl.innerHTML = getPlanContentTemplate(plan);
+        }
+
+        if(manualsEl){
+          manualsEl.innerHTML = getManualsTemplate(plan);
         }
 
         if(subplansEl){
@@ -1246,6 +1478,16 @@
     const modalIframe = document.getElementById("modalIframe");
     const modalVideo = document.getElementById("modalVideo");
 
+    const pdfModal = document.getElementById("pdfModal");
+    const pdfModalTitle = document.getElementById("pdfModalTitle");
+    const pdfModalClose = document.getElementById("pdfModalClose");
+    const pdfFrame = document.getElementById("pdfFrame");
+    const pdfLoading = document.getElementById("pdfLoading");
+    const pdfError = document.getElementById("pdfError");
+    const pdfDownloadLink = document.getElementById("pdfDownloadLink");
+
+    let currentPdfBlobUrl = null;
+
     function updateModalButtons(){
       const plan = PLANS.find(item => item.id === activePlanId);
       if(!plan) return;
@@ -1301,6 +1543,79 @@
       document.body.style.overflow = "";
     }
 
+    function resetPdfViewerState(){
+      pdfLoading.classList.remove("is-hidden");
+      pdfError.classList.add("is-hidden");
+      pdfError.textContent = "";
+      pdfFrame.src = "";
+
+      if(currentPdfBlobUrl){
+        URL.revokeObjectURL(currentPdfBlobUrl);
+        currentPdfBlobUrl = null;
+      }
+    }
+
+    async function loadPdfIntoFrame(url){
+      const response = await fetch(url, {
+        method: "GET",
+        credentials: "same-origin"
+      });
+
+      if(!response.ok){
+        throw new Error(`PDF 讀取失敗（HTTP ${response.status}）`);
+      }
+
+      const blob = await response.blob();
+
+      if(blob.size === 0){
+        throw new Error("PDF 讀取失敗：檔案內容為空。");
+      }
+
+      currentPdfBlobUrl = URL.createObjectURL(blob);
+      pdfFrame.src = currentPdfBlobUrl;
+    }
+
+    async function openPdfModal(url, title){
+      pdfModalTitle.textContent = title || "PDF 手冊預覽";
+      pdfDownloadLink.href = url;
+
+      resetPdfViewerState();
+
+      pdfModal.classList.add("is-open");
+      pdfModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+
+      try{
+        await loadPdfIntoFrame(url);
+      }catch(error){
+        pdfLoading.classList.add("is-hidden");
+        pdfError.classList.remove("is-hidden");
+        pdfError.textContent =
+          "PDF 無法在此視窗中顯示。\n\n可能原因：\n1. 伺服器限制讀取\n2. 跨來源限制（CORS）\n3. 檔案路徑或權限設定異常\n\n請先使用右下角「下載 / 備援開啟」確認檔案是否可取得。";
+        console.error(error);
+      }
+    }
+
+    function closePdfModal(){
+      pdfModal.classList.remove("is-open");
+      pdfModal.setAttribute("aria-hidden", "true");
+      resetPdfViewerState();
+      document.body.style.overflow = "";
+    }
+
+    pdfFrame.addEventListener("load", () => {
+      pdfLoading.classList.add("is-hidden");
+      pdfError.classList.add("is-hidden");
+    });
+
+    pdfModalClose.addEventListener("click", closePdfModal);
+
+    pdfModal.addEventListener("click", (event) => {
+      if(event.target === pdfModal){
+        closePdfModal();
+      }
+    });
+
     document.addEventListener("click", (event) => {
       const prevBtn = event.target.closest("[data-gallery-prev]");
       if(prevBtn){
@@ -1323,6 +1638,16 @@
         event.preventDefault();
         event.stopPropagation();
         setGalleryImage(Number(dotBtn.dataset.subplanIndex), Number(dotBtn.dataset.imageIndex));
+        return;
+      }
+
+      const manualButton = event.target.closest("[data-manual-pdf]");
+      if(manualButton){
+        event.preventDefault();
+        openPdfModal(
+          manualButton.dataset.manualPdf,
+          manualButton.dataset.manualTitle
+        );
         return;
       }
 
@@ -1356,8 +1681,14 @@
         return;
       }
 
-      if(event.key === "Escape" && modal.classList.contains("is-open")){
-        closeModal();
+      if(event.key === "Escape"){
+        if(pdfModal.classList.contains("is-open")){
+          closePdfModal();
+          return;
+        }
+        if(modal.classList.contains("is-open")){
+          closeModal();
+        }
       }
     });
 
